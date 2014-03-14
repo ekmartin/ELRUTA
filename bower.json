@@ -1,0 +1,20 @@
+{
+  "name": "powerhack",
+  "version": "0.0.1",
+  "authors": [
+    "Hanse <hanse19@gmail.com>"
+  ],
+  "description": "gief me power",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "semantic": "~0.14.0"
+  }
+}
