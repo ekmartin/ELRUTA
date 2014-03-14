@@ -1,6 +1,7 @@
-var express     = require("express")
-  , stylus      = require("stylus")
-  , nib         = require("nib")
+var express     = require('express')
+  , stylus      = require('stylus')
+  , nib         = require('nib')
+  , browserify  = require('browserify-middleware')
   , app         = module.exports = express()
 
 app.configure(function() {
@@ -18,6 +19,8 @@ app.configure(function() {
 
   app.locals.pretty = true;
 });
+
+app.get('/app.js', browserify('./assets/js/index.js'));
 
 app.get('/', function(req, res) {
   res.render('index');

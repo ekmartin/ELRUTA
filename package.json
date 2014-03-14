@@ -8,8 +8,13 @@
     "nib": "*",
     "mocha": "*",
     "express": "*",
-    "supervisor": "*"
+    "supervisor": "*",
+    "browserify-middleware": "~2.3.0"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "supervisor": "~0.5.x",
+    "browserify": "~3.32.x"
+  }
 }
