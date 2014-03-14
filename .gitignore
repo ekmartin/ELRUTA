@@ -1,3 +1,5 @@
 .DS_Store
+public/*.html
+public/css/*.css
 public/bower_components
 node_modules
