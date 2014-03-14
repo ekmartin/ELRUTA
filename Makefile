@@ -8,7 +8,7 @@ public/css/style.css: $(STYL)
 	node_modules/bin/stylus < public/css/style.styl --include /usr/local/share/npm/lib/node_modules/nib/lib > public/css/style.css
 
 %.html: %.jade
-	node_modules/bin/jade.js --pretty < $< > $@
+	node_modules/jade/bin/jade.js --pretty < $< > $@
 
 clean:
 	rm -f $(HTML)
