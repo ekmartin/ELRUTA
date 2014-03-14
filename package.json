@@ -5,7 +5,8 @@
   "dependencies": {
     "stylus": "*",
     "jade": "*",
-    "nib": "*"
+    "nib": "*",
+    "mocha:": "*"
   },
   "author": "",
   "license": "MIT"
