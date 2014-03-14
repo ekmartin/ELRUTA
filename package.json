@@ -1,0 +1,12 @@
+{
+  "name": "powerhack",
+  "version": "0.0.1",
+  "description": "",
+  "dependencies": {
+    "stylus": "*",
+    "jade": "*",
+    "nib": "*"
+  },
+  "author": "",
+  "license": "MIT"
+}
