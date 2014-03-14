@@ -5,15 +5,15 @@ HTML=$(JADE:.jade=.html)
 all: $(HTML) public/css/style.css
 
 public/css/style.css: $(STYL)
-	stylus < public/css/style.styl --include /usr/local/share/npm/lib/node_modules/nib/lib > public/css/style.css
+	node_modules/bin/stylus < public/css/style.styl --include /usr/local/share/npm/lib/node_modules/nib/lib > public/css/style.css
 
 %.html: %.jade
-	jade --pretty < $< > $@
+	node_modules/bin/jade.js --pretty < $< > $@
 
 clean:
 	rm -f $(HTML)
 
 test:
-	mocha --colors --reporter list
+	node_modules/bin/mocha --colors --reporter list
 
 .PHONY: clean test
