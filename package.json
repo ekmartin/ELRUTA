@@ -6,7 +6,9 @@
     "stylus": "*",
     "jade": "*",
     "nib": "*",
-    "mocha:": "*"
+    "mocha": "*",
+    "express": "*",
+    "supervisor": "*"
   },
   "author": "",
   "license": "MIT"

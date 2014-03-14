@@ -1,19 +1,11 @@
-STYL=$(shell find public/css -name *.styl)
-JADE=$(shell find public -name "*.jade")
-HTML=$(JADE:.jade=.html)
+install:
+	bower install
+	npm install
 
-all: $(HTML) public/css/style.css
-
-public/css/style.css: $(STYL)
-	node_modules/bin/stylus < public/css/style.styl --include /usr/local/share/npm/lib/node_modules/nib/lib > public/css/style.css
-
-%.html: %.jade
-	node_modules/jade/bin/jade.js --pretty < $< > $@
-
-clean:
-	rm -f $(HTML)
+server:
+	node_modules/.bin/supervisor index.js
 
 test:
-	node_modules/bin/mocha --colors --reporter list
+	node_modules/.bin/mocha --colors --reporter list
 
-.PHONY: clean test
+.PHONY: server install test
