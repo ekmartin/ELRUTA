@@ -1,1 +1,3 @@
-console.log('Hello World')
+require('./graph');
+
+$('.ui.accordion').accordion();

@@ -9,7 +9,8 @@
     "mocha": "*",
     "express": "*",
     "supervisor": "*",
-    "browserify-middleware": "~2.3.0"
+    "browserify-middleware": "~2.3.0",
+    "superagent": "~0.17.0"
   },
   "author": "",
   "license": "MIT",
