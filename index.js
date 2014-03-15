@@ -16,11 +16,12 @@ app.configure(function() {
     compile: function(str, path) {return stylus(str).set('filename', path).use(nib());}
   }));
   app.use(express.static(__dirname + '/public'));
-
+  app.use("/data", express.static(__dirname + '/assets/data'));
   app.locals.pretty = true;
 });
 
 app.get('/app.js', browserify('./assets/js/index.js'));
+app.get('/graph.js', browserify('./assets/js/graph.js'));
 
 app.get('/', function(req, res) {
   res.render('index');
