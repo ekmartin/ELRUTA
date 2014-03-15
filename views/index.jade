@@ -2,7 +2,7 @@ doctype html
 html
   head
     meta(charset='utf-8')
-    title PowefrHack
+    title PowerHack
     link(rel='stylesheet' href='/css/style.css')
     link(rel='stylesheet' href='/bower_components/semantic/build/packaged/css/semantic.min.css')
     link(rel='stylesheet' href='/bower_components/nvd3/nv.d3.min.css')
@@ -20,7 +20,7 @@ html
       svg#graph
 
       .ui.accordion#acc
-        .active.title
+        .active.title#first
           i.dropdown.icon
           | Info
         .active.content
@@ -35,4 +35,4 @@ html
     script(src="/bower_components/nvd3/nv.d3.min.js")
     script(src='/bower_components/jquery/dist/jquery.min.js')
     script(src='/bower_components/semantic/build/packaged/javascript/semantic.min.js')
-    script(src='/graph.js')
+    script(src='/app.js')
