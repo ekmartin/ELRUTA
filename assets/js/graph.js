@@ -1,33 +1,27 @@
-nv.addGraph(function() {
-  var chart = nv.models.lineWithFocusChart();
+d3.json('/data/cumulativeLineData.json', function(data) {
+  nv.addGraph(function() {
+    var chart = nv.models.cumulativeLineChart()
+                  .x(function(d) { return d[0] })
+                  .y(function(d) { return d[1]/100 }) //adjusting, 100% is 1.00, not 100 as it is in the data
+                  .color(d3.scale.category10().range())
+                  .useInteractiveGuideline(true)
+                  ;
 
-  chart.xAxis
-      .tickFormat(d3.format(',f'));
+     chart.xAxis
+        .tickValues([1078030800000,1122782400000,1167541200000,1251691200000])
+        .tickFormat(function(d) {
+            return d3.time.format('%x')(new Date(d))
+          });
 
-  chart.yAxis
-      .tickFormat(d3.format(',.2f'));
+    chart.yAxis
+        .tickFormat(d3.format(',.1%'));
 
-  chart.y2Axis
-      .tickFormat(d3.format(',.2f'));
+    d3.select('#graph')
+        .datum(data)
+        .call(chart);
 
-  d3.select('#chart svg')
-      .datum(testData())
-      .transition().duration(500)
-      .call(chart);
+    nv.utils.windowResize(chart.update);
 
-  nv.utils.windowResize(chart.update);
-
-  return chart;
-});
-/**************************************
- * Simple test data generator
- */
-
-function testData() {
-  return stream_layers(3,128,.1).map(function(data, i) {
-    return {
-      key: 'Stream' + i,
-      values: data
-    };
+    return chart;
   });
-}
+});
