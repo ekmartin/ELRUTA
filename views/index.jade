@@ -9,15 +9,34 @@ html(ng-app="powerhack")
 
   body
     #container
-      .ui.green.inverted.menu#nav
-        a(class="active item")
-          i(class="home icon")
+      .ui.inverted.menu#nav
+        a.active.item
+          i.home.icon
           | Menu
-        a(class="item")
-          i(class="mail icon")
+        a.item
+          i.mail.icon
           | Mail
 
-      svg#graph
+      .ui.grid
+        .equal.height.row.sixteen.column
+          .one.wide.column
+            .ui.vertical.inverted.menu#left
+              a.active.item
+                i.home.icon
+              a.item
+                i.mail.icon
+              a.item
+                i.user.icon
+          .fourteen.wide.column
+            svg#graph
+          .one.wide.column
+            .ui.vertical.inverted.menu#right
+              a.active.item
+                i.home.icon
+              a.item
+                i.mail.icon
+              a.item
+                i.user.icon
 
       .ui.accordion#acc
         .active.title#first
