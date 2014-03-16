@@ -18,25 +18,24 @@ html(ng-app="powerhack")
           | Mail
 
       .ui.grid
-        .equal.height.row.sixteen.column
-          .one.wide.column
-            .ui.vertical.inverted.menu#left
-              a.active.item
-                i.home.icon
-              a.item
-                i.mail.icon
-              a.item
-                i.user.icon
-          .fourteen.wide.column
-            svg#graph
-          .one.wide.column
-            .ui.vertical.inverted.menu#right
-              a.active.item
-                i.home.icon
-              a.item
-                i.mail.icon
-              a.item
-                i.user.icon
+        .two.wide.column
+          .ui.vertical.inverted.menu#left
+            a.active.item
+              i.home.icon
+            a.item
+              i.mail.icon
+            a.item
+              i.user.icon
+        .twelve.wide.column
+          svg#graph
+        .two.wide.column
+          .ui.vertical.inverted.menu#right
+            a.active.item
+              i.home.icon
+            a.item
+              i.mail.icon
+            a.item
+              i.user.icon
 
       .ui.accordion#acc
         .active.title#first
