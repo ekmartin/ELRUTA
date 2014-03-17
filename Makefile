@@ -10,8 +10,8 @@ server:
 
 rip: $(RIPPED)
 
-$(RIPPED): $(ICONS)
-	convert $< -channel rgba -alpha set -fuzz 10% -fill none +opaque "#4D4D4D" $@
+%.png: %.orig.png
+	convert $< -alpha extract -fuzz 15% -transparent black -threshold 0 $@
 
 test:
 	node_modules/.bin/mocha --colors --reporter list
