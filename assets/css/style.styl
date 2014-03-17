@@ -8,19 +8,39 @@ global-reset()
   box-sizing border-box
   font-smoothing antialiased
 
+html
+  background: url('/images/mountains.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height 100%
+
 body
-  background-color: #f9f9f7
+  height 100%
   line-height 2
   font-family 'Helvetica Neue', Helvetica, sans-serif
   font-size 16px
   position relative
+  background-color rgba(249,249,247, 0.8)
 
 h1
   font-size 30px
 
+.ui.vertical.inverted.menu .item
+  font-size 2.5rem
+
+
+#left
+#right
+  background-color #2a87d3
+  width 100%
+
 #container
-  width: 70%
-  margin: 0 auto
+  opacity 0.85
+  overflow hidden
+  width 90%
+  margin 0 auto
 
 header
   background linear-gradient(bottom, #1b8471, #2980b9)
@@ -61,10 +81,12 @@ footer
   padding 20px
 
 #graph
-  height: 400px
+  height 400px
+  margin 0 auto
 
 #acc
-  width: 100%
-  margin-top: 2%
-#acc .active.title
-  background-color: #296ad4
+  width 100%
+  margin 2% auto
+#acc #first
+  color #fff
+  background-color #2a87d3
