@@ -6,25 +6,31 @@ html(ng-app="powerhack")
     link(rel='stylesheet' href='/css/style.css')
     link(rel='stylesheet' href='/bower_components/semantic/build/packaged/css/semantic.min.css')
     link(rel='stylesheet' href='/bower_components/nvd3/nv.d3.min.css')
+    link(rel='stylesheet' href='/bower_components/animate.css/animate.min.css')
     link(rel='stylesheet' href='/css/style.css')
+    link(rel='stylesheet' href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css')
 
-  body
+  body(ng-controller='MainController')
     header
       nav
         ul
-          li
-            a(href='#') A
-          li
-            a(href='#') B
-          li
-            a(href='#') C
-          li
-            a(href='#') D
+          li(ng-repeat='(k,v) in categories')
+            a(href='#', ng-click='switchCategory(k)', title='{{v.title}}')
+              i.fa.fa-globe
+
+    aside(ng-class='{"ng-hide": (currentCategory.name != "water")}')
+      ul
+        li
+          a(href='#') Dusjing
+        li
+          a(href='#') Badekar
+        li
+          a(href='#') Vasking
     section
       svg#graph
 
     footer
-      p Morra di kan suge meg
+      p {{currentCategory.info}}
 
     script(src="/bower_components/d3/d3.min.js")
     script(src="/bower_components/nvd3/nv.d3.min.js")
@@ -33,4 +39,5 @@ html(ng-app="powerhack")
     script(src='/bower_components/angular/angular.min.js')
     script(src='/bower_components/angular-resource/angular-resource.min.js')
     script(src='/bower_components/angular-route/angular-route.min.js')
+    script(src='/bower_components/angular-animate/angular-animate.js')
     script(src='/app.js')
