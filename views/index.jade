@@ -9,25 +9,22 @@ html
     link(rel='stylesheet' href='/css/style.css')
 
   body
-    #container
-      .ui.green.inverted.menu#nav
-        a.active.item.shower Shower
-        a.item.lighting Lights
-        a.item.warming Warming
-
+    header
+      nav
+        ul
+          li
+            a(href='#') A
+          li
+            a(href='#') B
+          li
+            a(href='#') C
+          li
+            a(href='#') D
+    section
       svg#graph
 
-      .ui.accordion#acc
-        .active.title
-          i.dropdown.icon
-          | Info
-        .active.content
-          p Info om tingen du har valgt å sjekke sparing på (ødelagt js).
-        .title
-          i.dropdown.icon
-          | Mer info
-        .content
-          p Mer info om tingen du har valgt å sjekke sparing på.
+    footer
+      p Morra di kan suge meg
 
     script(src="/bower_components/d3/d3.min.js")
     script(src="/bower_components/nvd3/nv.d3.min.js")

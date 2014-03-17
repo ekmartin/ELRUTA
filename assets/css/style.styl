@@ -13,6 +13,7 @@ body
   line-height 2
   font-family 'Helvetica Neue', Helvetica, sans-serif
   font-size 16px
+  position relative
 
 h1
   font-size 30px
@@ -21,14 +22,43 @@ h1
   width: 70%
   margin: 0 auto
 
-#nav
-  margin: 2% auto
+header
   background linear-gradient(bottom, #1b8471, #2980b9)
+  position fixed
+  top 0
+  left 0
+  right 0
 
-  a
-    font-size 20px
-    font-weight 400
-    padding 20px
+nav
+  ul
+
+    li
+      display inline-block
+
+      a
+        font-size 26px
+        font-weight 400
+        display inline-block
+        padding 30px 60px
+        color #fff
+        text-decoration none
+        font-weight 700
+
+        &:hover
+          background rgba(255, 255, 255, .1)
+
+section
+  position relative
+  top 120px
+
+footer
+  background linear-gradient(#ddd, #efefef)
+  position fixed
+  bottom 0
+  left 0
+  right 0
+  height 200px
+  padding 20px
 
 #graph
   height: 400px
