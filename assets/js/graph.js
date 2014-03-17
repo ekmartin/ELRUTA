@@ -1,24 +1,26 @@
 d3.json('/data/cumulativeLineData.json', function(data) {
   nv.addGraph(function() {
-    var chart = nv.models.cumulativeLineChart()
-                  .x(function(d) { return d[0]; })
-                  .y(function(d) { return d[1]/100; }) //adjusting, 100% is 1.00, not 100 as it is in the data
-                  .color(d3.scale.category10().range())
-                  .useInteractiveGuideline(true)
-                  ;
+    var chart = nv.models.lineWithFocusChart()
+      .x(function(d) {
+        return d[0];
+      })
+      .y(function(d) {
+        return d[1]/100;
+      });
 
-     chart.xAxis
-        .tickValues([1078030800000,1122782400000,1167541200000,1251691200000])
-        .tickFormat(function(d) {
-            return d3.time.format('%x')(new Date(d));
-          });
+    chart.xAxis
+      .tickFormat(d3.format(',f'));
+    chart.x2Axis
+      .tickFormat(d3.format(',f'));
 
     chart.yAxis
-        .tickFormat(d3.format(',.1%'));
+      .tickFormat(d3.format(',.2f'));
+    chart.y2Axis
+      .tickFormat(d3.format(',.2f'));
 
     d3.select('#graph')
-        .datum(data)
-        .call(chart);
+      .datum(data)
+      .call(chart);
 
     nv.utils.windowResize(chart.update);
 
