@@ -3,51 +3,41 @@ html(ng-app="powerhack")
   head
     meta(charset='utf-8')
     title PowerHack
-    link(rel='stylesheet' href='/css/style.css')
-    link(rel='stylesheet' href='/bower_components/semantic/build/packaged/css/semantic.min.css')
+    //link(rel='stylesheet' href='/bower_components/semantic/build/packaged/css/semantic.min.css')
     link(rel='stylesheet' href='/bower_components/nvd3/nv.d3.min.css')
+    link(rel='stylesheet' href='/css/style.css')
 
   body
-    #container
-      .ui.inverted.menu#nav
-        a.active.item
-          i.home.icon
-          | Menu
-        a.item
-          i.mail.icon
-          | Mail
+    header
+      h1 powerhack
 
-      .ui.grid
-        .two.wide.column
-          .ui.vertical.inverted.menu#left
-            a.active.item
-              i.home.icon
-            a.item
-              i.mail.icon
-            a.item
-              i.user.icon
-        .twelve.wide.column
-          svg#graph
-        .two.wide.column
-          .ui.vertical.inverted.menu#right
-            a.active.item
-              i.home.icon
-            a.item
-              i.mail.icon
-            a.item
-              i.user.icon
+    #sidebar
+      p Mordi er mann
 
-      .ui.accordion#acc
-        .active.title#first
-          i.dropdown.icon
-          | Info
-        .active.content
-          p Info om tingen du har valgt å sjekke sparing på (ødelagt js).
-        .title
-          i.dropdown.icon
-          | Mer info
-        .content
-          p Mer info om tingen du har valgt å sjekke sparing på.
+    #content
+      svg#graph
+
+    footer
+      #category-nav
+        ul
+          li
+            a(href='#') Hello
+          li
+            a(href='#') World
+          li
+            a(href='#') Editor
+      #sub-category-nav
+        .grid
+          a(href='#') A
+          a(href='#') B
+          a(href='#') C
+          a(href='#') D
+          a(href='#') E
+          a(href='#') F
+          a(href='#') G
+          a(href='#') H
+      #footer-content
+        p Velkommen
 
     script(src="/bower_components/d3/d3.min.js")
     script(src="/bower_components/nvd3/nv.d3.min.js")
