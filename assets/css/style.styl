@@ -25,60 +25,94 @@ body
 
 h1
   font-size 30px
+  color white
+  padding-left 20px
 
 header
-  height 100px
-  padding 20px
+  position absolute
+  height 80px
+  padding 10px
   background #2BB3E5
   absolute left top right
+  top 10px
+  left 10px
+  right 10px
+
+#navbar-content
+  absolute top right
+  margin-right 10px
+  right 10px
+  top 10px
+  height 100%
+  width 10%
+
+  .grid a
+    display inline-block
+    right 20px
+    background #2BB3E5
+    height 25%
+    width 50%
+    line-height 60px
+    text-align center
+    color #fff
+
+    &:hover
+      background #18637F
+      font-weight 700
 
 #sidebar
-  width 20%
   position absolute
-  absolute left bottom
   top 100px
+  width 15%
+  absolute left
   background #2495BF
   padding 20px
+  margin-left 10px
+  bottom 210px
+
+  .grid a
+    display inline-block
+    background #2495BF
+    height 25%
+    width 50%
+    line-height 100px
+    text-align center
+    color #fff
+
+    &:hover
+      background #18637F
+      font-weight 700
 
 #content
 op
   position absolute
   top 100px
-  left 20%
-  bottom 200px
-  right 0
+  left 15%
+  margin-left 20px
+  bottom 210px
+  right 10px
   background #fff
 
 footer
-  height 200px
-  background pink
+  position absolute
+  height 190px
   absolute left bottom right
+  bottom 10px
 
 #category-nav
-  background #2BB3E5
+  background #18637F
   position absolute
-  width 20%
+  width 15%
   height 100%
+  left 10px
+  margin-right 10px
 
-  li a
-    display block
-    background #bdc3c7
-    border-bottom 1px solid #fff
-    padding 5px 10px
-
-#sub-category-nav
-  position absolute
-  left 20%
-  width 30%
-  height 100%
-  background blue
-
-  .grid a
+  .subgrid a
     display inline-block
     background #18637F
-    height 50%
-    width 25%
-    line-height 100px
+    height 25%
+    width 50%
+    line-height 95px
     text-align center
     color #fff
 
@@ -86,10 +120,36 @@ footer
       background #2c3e50
       font-weight 700
 
-#footer-content
-  right 0
+#subfooter
   position absolute
-  background #2BB3E5
-  padding 20px
+  height 190px
+  absolute left bottom right
+  left 15%
+  margin-left 20px
+
+#sub-category-nav
+  position absolute
   width 50%
+  background #2BB3E5
+
+  .grid a
+    display inline-block
+    background #2BB3E5
+    height 50%
+    width 25%
+    line-height 95px
+    text-align center
+    color #fff
+
+    &:hover
+      background #18637F
+      font-weight 700
+
+#footer-content
+  position absolute
+  background #bdc3c7
+  padding 20px
+  left 50%
   height 100%
+  margin-left 10px
+  right 10px

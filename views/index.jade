@@ -9,9 +9,24 @@ html(ng-app="powerhack")
 
   body
     header
-      h1 powerhack
+      h1 Powerhack - Strømshiat
+      #navbar-content
+        .grid
+          a(href='#') OM
+          a(href='#') INFO
 
     #sidebar
+      .grid
+        a(href='#') A
+        a(href='#') B
+        a(href='#') C
+        a(href='#') D
+        a(href='#') E
+        a(href='#') F
+
+      #sidebar-content
+      p Mordi er mann
+      p Mordi er mann
       p Mordi er mann
 
     #content
@@ -19,25 +34,24 @@ html(ng-app="powerhack")
 
     footer
       #category-nav
-        ul
-          li
-            a(href='#') Hello
-          li
-            a(href='#') World
-          li
-            a(href='#') Editor
-      #sub-category-nav
-        .grid
-          a(href='#') A
-          a(href='#') B
-          a(href='#') C
-          a(href='#') D
-          a(href='#') E
-          a(href='#') F
-          a(href='#') G
-          a(href='#') H
-      #footer-content
-        p Velkommen
+        .subgrid
+          a(href='#') World
+          a(href='#') Editor
+          a(href='#') World
+          a(href='#') Editor
+      #subfooter
+        #sub-category-nav
+          .grid
+            a(href='#') A
+            a(href='#') B
+            a(href='#') C
+            a(href='#') D
+            a(href='#') E
+            a(href='#') F
+            a(href='#') G
+            a(href='#') H
+        #footer-content
+          p Velkommen
 
     script(src="/bower_components/d3/d3.min.js")
     script(src="/bower_components/nvd3/nv.d3.min.js")
