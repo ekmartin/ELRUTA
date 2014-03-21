@@ -39,15 +39,15 @@ html(ng-app="powerhack")
 
     footer
       #category-nav
-        a(href='', ng-repeat='category in categories', ng-click='chooseCategory(category)') {{category.name}}
+        a(href='' ng-repeat='category in categories', ng-click='chooseCategory(category)') {{category.name}}
 
       #subfooter
         #sub-category-nav
           .grid
-            a(href='', ng-repeat='sub in currentCategory.sub') {{sub}}
-            
+            a(href='' ng-repeat='sub in currentCategory.sub', ng-click='chooseSub(sub)') {{sub}}
+
         #footer-content
-          p Velkommen
+          div(ng-include='getCurrentSettingsTemplate()')
 
     script(src="/bower_components/d3/d3.min.js")
     script(src="/bower_components/nvd3/nv.d3.min.js")
@@ -57,4 +57,5 @@ html(ng-app="powerhack")
     script(src='/bower_components/angular-resource/angular-resource.min.js')
     script(src='/bower_components/angular-route/angular-route.min.js')
     script(src='/bower_components/angular-animate/angular-animate.min.js')
+    script(src='/bower_components/angular-ui-router/release/angular-ui-router.min.js')
     script(src='/app.js')
