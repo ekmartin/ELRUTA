@@ -3,8 +3,47 @@ var chart;
 
 var changeGraph = 0;
 
-function addLineGraph(json) {
-  d3.json(json, function(data) {
+exports.addLineGraph = function(json) {
+  console.log(json);
+  var newData = [
+    {
+      key: 'History',
+      color: '#ff7f0e',
+      values: []
+    },
+    {
+      key: 'Predicted',
+      color: '#2ca02c',
+      values: []
+    },
+    {
+      key: 'Changed',
+      color: '#2222ff',
+      values: []
+    }
+  ];
+
+  for (var key in json) {
+    newData[0].values.push({
+      x: json[key].timeStamp,
+      y: json[key].value
+    });
+    var year = moment().year();
+    var lastYear = year -1;
+    if (lastYear in json[key].timeStamp) {
+      newData[1].values.push({
+        x: json[key].timeStamp.replace(String(lastYear), String(year)),
+        y: json[key].value
+      });
+      newData[2].values.push({
+        x: json[key].timeStamp.replace(String(lastYear), String(year)),
+        y: json[key].value
+      });
+    }
+  }
+
+  d3.json(newData, function(data) {
+    console.log("2", data);
     nv.addGraph(function() {
       chart = nv.models.lineWithFocusChart();
 
@@ -24,8 +63,6 @@ function addLineGraph(json) {
       chart.y2Axis
           .tickFormat(d3.format(',.2f'));
 
-      data = testData();
-
       console.log("data:", data);
       d3.select('#graph')
           .datum(data)
@@ -38,7 +75,7 @@ function addLineGraph(json) {
   });
 }
 
-function updateData(change) {
+exports.updateData = function(change) {
   for (var i in data[changeGraph].values) {
     data[changeGraph].values[i].y += change;
   }
