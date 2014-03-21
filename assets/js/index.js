@@ -30,32 +30,6 @@ app.run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $
   $rootScope.$stateParams = $stateParams;
 }]);
 
-// app.config(function($stateProvider, $urlRouterProvider) {
-//   $urlRouterProvider.otherwise('/');
-//   $stateProvider
-//     .state('categories', {
-//       abstract: true,
-//       url: '/categories',
-//       templateUrl: 'partials/category'
-//     })
-//
-//     .state('categories.show', {
-//       url: '/:category',
-//       templateUrl: 'partials/category',
-//       controller: function($scope, $stateParams) {
-//         console.log("H")
-//       }
-//     })
-//
-//     .state('categories.show.settings', {
-//       url: '/:sub',
-//       templateUrl: 'partials/settings',
-//       controller: function($scope, $stateParams) {
-//         console.log("State params", $stateParams);
-//       }
-//     })
-// });
-
 app.controller('MainController', ['$scope', function($scope) {
   $scope.categories = categories;
   $scope.currentCategory = categories.water;
@@ -71,9 +45,8 @@ app.controller('MainController', ['$scope', function($scope) {
   };
 
   $scope.getCurrentSettingsTemplate = function() {
-    if ($scope.currentSub) {
+    if ($scope.currentSub)
       return "partials/" + $scope.currentCategory.id + "." + $scope.currentSub.toLowerCase();
-    }
     return "partials/welcome";
   };
 }]);
