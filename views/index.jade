@@ -3,51 +3,51 @@ html(ng-app="powerhack")
   head
     meta(charset='utf-8')
     title PowerHack
-    link(rel='stylesheet' href='/css/style.css')
-    link(rel='stylesheet' href='/bower_components/semantic/build/packaged/css/semantic.min.css')
+    //link(rel='stylesheet' href='/bower_components/semantic/build/packaged/css/semantic.min.css')
     link(rel='stylesheet' href='/bower_components/nvd3/nv.d3.min.css')
+    link(rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet' href='/css/style.css')
 
-  body
-    #container
-      .ui.inverted.menu#nav
-        a.active.item
-          i.home.icon
-          | Menu
-        a.item
-          i.mail.icon
-          | Mail
+  body(ng-controller='MainController')
+    header
+      h1 Strømoversikt
+      #navbar-content
+        div
+          a(href='#')
+            i.fa.fa-map-marker
+          a(href='#')
+            i.fa.fa-info
 
-      .ui.grid
-        .two.wide.column
-          .ui.vertical.inverted.menu#left
-            a.active.item
-              i.home.icon
-            a.item
-              i.mail.icon
-            a.item
-              i.user.icon
-        .twelve.wide.column
-          svg#graph
-        .two.wide.column
-          .ui.vertical.inverted.menu#right
-            a.active.item
-              i.home.icon
-            a.item
-              i.mail.icon
-            a.item
-              i.user.icon
+    #sidebar
+      .grid
+        a(href='#') Live
+        a(href='#') Sparing
+        a(href='#') Naboen
 
-      .ui.accordion#acc
-        .active.title#first
-          i.dropdown.icon
-          | Info
-        .active.content
-          p Info om tingen du har valgt å sjekke sparing på (ødelagt js).
-        .title
-          i.dropdown.icon
-          | Mer info
-        .content
-          p Mer info om tingen du har valgt å sjekke sparing på.
+      #sidebar-content
+        .consumption
+          p Forbruk
+            span 6434 kWh
+
+    #content
+      ul.tabs
+        li
+          a.active(href='') Pie Chart
+        li
+          a(href='') Histogram
+      svg#graph
+
+    footer
+      #category-nav
+        a(href='' ng-repeat='category in categories', ng-click='chooseCategory(category)') {{category.name}}
+
+      #subfooter
+        #sub-category-nav
+          .grid
+            a(href='' ng-repeat='sub in currentCategory.sub', ng-click='chooseSub(sub)') {{sub}}
+
+        #footer-content
+          div(ng-include='getCurrentSettingsTemplate()')
 
     script(src="/bower_components/d3/d3.min.js")
     script(src="/bower_components/nvd3/nv.d3.min.js")
@@ -56,4 +56,6 @@ html(ng-app="powerhack")
     script(src='/bower_components/angular/angular.min.js')
     script(src='/bower_components/angular-resource/angular-resource.min.js')
     script(src='/bower_components/angular-route/angular-route.min.js')
+    script(src='/bower_components/angular-animate/angular-animate.min.js')
+    script(src='/bower_components/angular-ui-router/release/angular-ui-router.min.js')
     script(src='/app.js')
