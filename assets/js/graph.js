@@ -1,10 +1,10 @@
 var data;
 var chart;
 
-var changeGraph = 0;
+var changeGraph = 2;
 
 exports.addLineGraph = function(json) {
-  var newData = [
+  data = [
     {
       key: 'History',
       color: '#ff0000',
@@ -14,11 +14,6 @@ exports.addLineGraph = function(json) {
       key: 'Predicted',
       color: '#00ff00',
       values: []
-    },
-    {
-      key: 'Changed',
-      color: '#0000ff',
-      values: []
     }
   ];
 
@@ -27,45 +22,46 @@ exports.addLineGraph = function(json) {
     var lastYear = year -1;
     var timeStamp = moment(json[key].timeStamp, 'YYYY-MM-DD');
     var modTimeStamp = moment(json[key].timeStamp.replace(String(lastYear), String(year)), 'YYYY-MM-DD');
-    newData[0].values.push({
+    data[0].values.push({
       x: timeStamp.unix(),
       y: json[key].value
     });
     if (!modTimeStamp.isBefore()) {
-      newData[1].values.push({
-        x: modTimeStamp.unix(),
-        y: json[key].value
-      });
-      newData[2].values.push({
+      data[1].values.push({
         x: modTimeStamp.unix(),
         y: json[key].value
       });
     }
   }
-  console.log(newData,"her");
-  nv.addGraph(function() {
-    chart = nv.models.lineWithFocusChart();
 
-    chart.transitionDuration(500);
+nv.addGraph(function() {
+    chart = nv.models.lineWithFocusChart()
+      .options({
+        showXAxis: true,
+        showYAxis: true,
+        transitionDuration: 250,
+        margin: {left: 100, bottom: 50}
+      });
 
+    //chart.useInteractiveGuideline(true);
     chart.xAxis
       .axisLabel('Date')
       .tickFormat(function(d) {
           return d3.time.format('%d/%m/%y')(new Date(d*1000));
       });
     chart.x2Axis
-      .axisLabel('Date')
       .tickFormat(function(d) {
           console.log("d:", d);
           return d3.time.format('%d/%m/%y')(new Date(d*1000));
       });
     chart.yAxis
-        .tickFormat(d3.format('d'));
+      .axisLabel('Strømforbruk (kW/h)')
+      .tickFormat(d3.format('d'));
     chart.y2Axis
-        .tickFormat(d3.format('d'));
+      .tickFormat(d3.format('d'));
 
     d3.select('#graph')
-        .datum(newData)
+        .datum(data)
         .call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -75,7 +71,28 @@ exports.addLineGraph = function(json) {
 };
 
 exports.updateData = function(change) {
-  for (var i in data[changeGraph].values) {
-    data[changeGraph].values[i].y += change;
+  if (!data[2]) {
+    data.push(
+      {
+        key: 'Changed',
+        color: '#0000ff',
+        values: []
+      }
+    );
+    for (var i = 0; i < data[1].values.length; i++) {
+      data[2].values.push({
+        x: data[1].values[i].x,
+        y: data[1].values[i].y
+      });
+    }
   }
+
+  for (var j in data[changeGraph].values) {
+    data[changeGraph].values[j].y -= change;
+  }
+
+  console.log(data);
+  chart.update();
 };
+
+$('#test').click(function() { console.log("hei");exports.updateData(10);});
