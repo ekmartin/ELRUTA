@@ -12,9 +12,8 @@ function addLineGraph(json) {
 
       chart.xAxis
           .tickFormat(function(d) {
-              return d3.time.format('%d/%m/%y')(
-                console.log(d);
-                moment(d).format('DD/MM/YY');
+              return d3.time.format('%d/%m/%y')
+                (moment(d).format('DD/MM/YY')
               );
           });
       chart.x2Axis
