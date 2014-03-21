@@ -97,7 +97,7 @@
       "element": "Dimmer",
       "template": "dimmer",
       "description": "Dersom pærene dine støtter det, og du kunne tenke deg å installere lysdimmere så kan det også føre til mindre strømregning!",
-      "icon": "dim.png",
+      "icon": "dimmer.png",
       "baselevel": 16,
       "powerconsumption": "0",
       "sliderconstant": 0.7
