@@ -8,7 +8,7 @@ html(ng-app="powerhack")
     link(rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.min.css')
     link(rel='stylesheet' href='/css/style.css')
 
-  body
+  body(ng-controller='MainController')
     header
       h1 Strømoversikt
       #navbar-content
@@ -28,7 +28,6 @@ html(ng-app="powerhack")
         .consumption
           p Forbruk
             span 6434 kWh
-          p
 
     #content
       ul.tabs
@@ -40,22 +39,13 @@ html(ng-app="powerhack")
 
     footer
       #category-nav
-        a(href='#') Vann
-        a(href='#') Varme
-        a(href='#') Elektronikk
-        a(href='#') Annet
+        a(href='', ng-repeat='category in categories', ng-click='chooseCategory(category)') {{category.name}}
 
       #subfooter
         #sub-category-nav
           .grid
-            a(href='#') A
-            a(href='#') B
-            a(href='#') C
-            a(href='#') D
-            a(href='#') E
-            a(href='#') F
-            a(href='#') G
-            a(href='#') H
+            a(href='', ng-repeat='sub in currentCategory.sub') {{sub}}
+            
         #footer-content
           p Velkommen
 
@@ -66,4 +56,5 @@ html(ng-app="powerhack")
     script(src='/bower_components/angular/angular.min.js')
     script(src='/bower_components/angular-resource/angular-resource.min.js')
     script(src='/bower_components/angular-route/angular-route.min.js')
+    script(src='/bower_components/angular-animate/angular-animate.min.js')
     script(src='/app.js')
