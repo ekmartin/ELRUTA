@@ -66,6 +66,21 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', f
       return "partials/" + $scope.currentCategory.id + "." + $scope.currentSub.template;
     return "partials/welcome";
   };
+
+
+  /* Kalkulerer priser */
+  $scope.kwhPrice = 40.5; // Øre pr kwh
+  $scope.calculateEarned = function(kwh, days) { // kwh: kwh du sparer, days: hvor lenge du skal spare, returnerer sparte kroner
+    return (($scope.kwhPrice/100) * kwh * days);
+  }
+  $scope.calculatePrice = function(data) { // Tar data fra apiet inn og returnerer pris
+    var total = 0;
+    for (var i = 0; i<data.length; i++) {
+      total += (($scope.kwhPrice/100) * data[i].value);
+    }
+    return total;
+  }
+
 }]);
 
 app.controller('GraphController', ['$scope', '$http', '$rootScope',
