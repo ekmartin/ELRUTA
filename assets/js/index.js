@@ -2,28 +2,7 @@ require('./graph');
 
 var app = angular.module('powerhack', ['ngAnimate','ui.router']);
 
-var categories = {
-  'water': {
-    id: 'water',
-    name: 'Vann',
-    sub: ['Dusj', 'Badekar', 'Vask', 'Oppvask']
-  },
-  'temperature': {
-    id: 'temperature',
-    name: 'Temperatur',
-    sub: ['Dusj', 'Badekar', 'Vaskemaskin']
-  },
-  'electronics': {
-    id: 'electronics',
-    name: 'Elektronikk',
-    sub: ['PC', 'TV', 'Kaffetrakter']
-  },
-  'other': {
-    id: 'other',
-    name: 'Annet',
-    sub: ['Bil', 'Test', 'Båt']
-  }
-};
+var categories = require('./savings.json')
 
 app.run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
   $rootScope.$state = $state;
@@ -31,7 +10,16 @@ app.run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $
 }]);
 
 app.controller('MainController', ['$scope', function($scope) {
-  $scope.categories = categories;
+  var res = {};
+  for (var key in categories) {
+    res[key] = {
+      id: key,
+      name: key,
+      subcategories: categories[key]
+    }
+  }
+
+  $scope.categories = res;
   $scope.currentCategory = categories.water;
   $scope.currentSub = null;
 
@@ -46,7 +34,7 @@ app.controller('MainController', ['$scope', function($scope) {
 
   $scope.getCurrentSettingsTemplate = function() {
     if ($scope.currentSub)
-      return "partials/" + $scope.currentCategory.id + "." + $scope.currentSub.toLowerCase();
+      return "partials/" + $scope.currentCategory.id + "." + $scope.currentSub.element.toLowerCase();
     return "partials/welcome";
   };
 }]);

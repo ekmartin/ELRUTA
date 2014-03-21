@@ -15,7 +15,7 @@
       "baselevel": 0,
       "averagewaterusage": 200,
       "sliderconstant": 7
-    }
+    },
 
     {
       "element": "Vaskemaskin",
@@ -45,7 +45,7 @@
     }
   ],
 
-  "heater": [
+  "heating": [
     {
       "element": "Fyring",
       "decription": "Varmepumpe vs elektisk/oljefyring (prosent av total kwh)",
