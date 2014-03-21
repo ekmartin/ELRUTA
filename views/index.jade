@@ -3,7 +3,10 @@ html(ng-app="powerhack")
   head
     meta(charset='utf-8')
     title PowerHack
-    //link(rel='stylesheet' href='/bower_components/semantic/build/packaged/css/semantic.min.css')
+
+    script(src="/bower_components/pace/pace.min.js")
+    link(rel='stylesheet' href='/css/pace.css')
+
     link(rel='stylesheet' href='/bower_components/nvd3/nv.d3.min.css')
     link(rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.min.css')
     link(rel='stylesheet' href='/css/style.css')
@@ -51,6 +54,7 @@ html(ng-app="powerhack")
 
         #footer-content
           div.settings(ng-include='getCurrentSettingsTemplate()')
+
 
     script(src="/bower_components/momentjs/moment.js")
     script(src="/bower_components/d3/d3.min.js")
