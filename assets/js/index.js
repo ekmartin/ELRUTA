@@ -44,6 +44,11 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
 
   $scope.meterValue = 6500120;
 
+  $scope.household = {
+    persons: 2,
+    rooms: 4
+  };
+
   var meterValueTimer = function() {
     $scope.meterValue += 1;
     $timeout(meterValueTimer, 3000);

@@ -15,10 +15,12 @@ html(ng-app="powerhack")
       h1 Strømoversikt
       #navbar-content
         div
-          a(href='#')
-            i.fa.fa-map-marker
-          a(href='#')
-            i.fa.fa-info
+          label Personer
+          label Rom
+          br
+          
+          input(type='number', ng-model='household.persons')
+          input(type='number', ng-model='household.rooms')
 
     #sidebar
       .grid
