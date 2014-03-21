@@ -201,4 +201,25 @@ footer
 .form
   margin-top 20px
 
+.settings
+  position relative
+
+  &.ng-leave, &.ng-enter
+    transition all .6s
+
+  &.ng-enter
+    opacity 0
+    z-index 50
+
+  &.ng-enter.ng-enter-active
+    opacity 1
+
+  &.ng-leave
+    opacity 1
+    z-index 200
+
+  &.ng-leave.ng-leave-active
+    opacity 0
+    height 0
+
 @import 'tabs'
