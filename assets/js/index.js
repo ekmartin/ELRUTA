@@ -54,7 +54,7 @@ app.controller('MainController', ['$scope', 'localStorageService', function($sco
 
   $scope.getCurrentSettingsTemplate = function() {
     if ($scope.currentSub)
-      return "partials/" + $scope.currentCategory.id + "." + $scope.currentSub.element.toLowerCase();
+      return "partials/" + $scope.currentCategory.id + "." + $scope.currentSub.template;
     return "partials/welcome";
   };
 }]);
