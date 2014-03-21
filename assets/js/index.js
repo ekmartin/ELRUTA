@@ -1,15 +1,11 @@
 require('./graph');
 
-var app = angular.module('powerhack', ['ngAnimate','ui.router']);
+var app = angular.module('powerhack', ['ngAnimate', 'LocalStorageModule']);
 
 var categories = require('./savings.json')
 
-app.run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
-  $rootScope.$state = $state;
-  $rootScope.$stateParams = $stateParams;
-}]);
 
-app.controller('MainController', ['$scope', function($scope) {
+app.controller('MainController', ['$scope', 'localStorageService', function($scope, localStorageService) {
   var res = {};
   for (var key in categories) {
     res[key] = {
@@ -20,11 +16,12 @@ app.controller('MainController', ['$scope', function($scope) {
   }
 
   $scope.categories = res;
-  $scope.currentCategory = categories.water;
+  $scope.currentCategory = localStorageService.get('currentCategory');
   $scope.currentSub = null;
 
   $scope.chooseCategory = function(category) {
     $scope.currentCategory = category;
+    localStorageService.add('currentCategory', category);
     $scope.currentSub = null;
   };
 
