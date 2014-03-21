@@ -28,7 +28,7 @@ app.run(function($rootScope) {
 var categories = require('./savings.json')
 
 
-app.controller('MainController', ['$scope', 'localStorageService', function($scope, localStorageService) {
+app.controller('MainController', ['$scope', '$timeout', 'localStorageService', function($scope, $timeout, localStorageService) {
   var res = {};
   for (var key in categories) {
     res[key] = {
@@ -42,6 +42,15 @@ app.controller('MainController', ['$scope', 'localStorageService', function($sco
   $scope.currentCategory = localStorageService.get('currentCategory');
   $scope.currentSub = null;
 
+  $scope.meterValue = 6500120;
+
+  var meterValueTimer = function() {
+    $scope.meterValue += 1;
+    $timeout(meterValueTimer, 3000);
+  };
+
+  meterValueTimer();
+
   $scope.chooseCategory = function(category) {
     $scope.currentCategory = category;
     localStorageService.add('currentCategory', category);
@@ -54,7 +63,7 @@ app.controller('MainController', ['$scope', 'localStorageService', function($sco
 
   $scope.getCurrentSettingsTemplate = function() {
     if ($scope.currentSub)
-      return "partials/" + $scope.currentCategory.id + "." + $scope.currentSub.element.toLowerCase();
+      return "partials/" + $scope.currentCategory.id + "." + $scope.currentSub.template;
     return "partials/welcome";
   };
 }]);

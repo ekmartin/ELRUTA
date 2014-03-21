@@ -2,6 +2,7 @@
   "water": [
     {
       "element": "Dusj",
+      "template": "dusj",
       "description": "Vanlig / sparedusjhode og antall minutter",
       "icon": "shower.png",
       "baselevel": 10,
@@ -11,6 +12,7 @@
 
     {
       "element": "Badekar",
+      "template": "badekar",
       "description": "Badekar er litt luksus i hverdagen, og bruker mer vann enn dusjen.",
       "icon": "bathtub.png",
       "baselevel": 0,
@@ -20,6 +22,7 @@
 
     {
       "element": "Vaskemaskin",
+      "template": "vaskemaskin",
       "description": "Vaskemaskinen kan være en stor ",
       "icon": "washmachine.png",
       "baselevel": 2,
@@ -29,6 +32,7 @@
 
     {
       "element": "Vask",
+      "template": "vask",
       "description": "Mengde vann somehting",
       "icon": "wash.png",
       "baselevel": 10,
@@ -38,6 +42,7 @@
 
     {
       "element": "Oppvaskmaskin",
+      "template": "oppvaskmaskin",
       "description": "Oppvask somehting",
       "icon": "washmachine.png",
       "baselevel": 30,
@@ -49,6 +54,7 @@
   "heating": [
     {
       "element": "Fyring",
+      "template": "fyring",
       "decription": "Varmepumpe vs elektisk/oljefyring (prosent av total kwh)",
       "icon": "heating.png",
       "baselevel": 0.6,
@@ -58,6 +64,7 @@
 
     {
       "element": "Stekeovn",
+      "template": "stekeovn",
       "description": "Bruk av stekeovn",
       "icon": "stove.png",
       "averagepowerconsumption": "Bruk av stekeovn",
@@ -66,6 +73,7 @@
 
     {
       "element": "Isolasjon",
+      "template": "isolasjon",
       "description": "Dersom du etter-isolerer huset ditt vil det føre til sparte kostnader i oppvarming over tid. (prosent av total kwh)",
       "icon": "insulation.png",
       "energyclass": "D",
@@ -77,6 +85,7 @@
   "light": [
     {
       "element": "Glødepærer",
+      "template": "glodeparer",
       "description": "De tradisjonelle lyspærene.",
       "icon": "lightbulb.png",
       "baselevel": 16,
@@ -86,6 +95,7 @@
 
     {
       "element": "Sparepærer",
+      "template": "spareparer",
       "description": "Energieffektivt alternativ til glødepærer.",
       "icon": "ecobulb.png",
       "baselevel": 16,
@@ -95,6 +105,7 @@
 
     {
       "element": "Halogenpærer",
+      "template": "halogenparer",
       "description": "Halogenpærer er en annen type lyspære, som er litt mer energieffektiv enn glødepærer.",
       "icon": "lightbulb.png",
       "baselevel": 16,
@@ -104,6 +115,7 @@
 
     {
       "element": "LED-pærer",
+      "template": "ledparer",
       "decription": "LED-pærer er diodebaserte pærer som er veldig energieffektive og har lang holdbarhet",
       "icon": "led.png",
       "baselevel": 16,
@@ -115,6 +127,7 @@
   "electronics": [
     {
       "element": "Kjøleskap",
+      "template": "kjoleskap",
       "description": "Kjøleskap 1.1kWh",
       "icon": "refrigerator.png",
       "energyclass": "D",
@@ -124,6 +137,7 @@
 
     {
       "element": "Fryser",
+      "template": "fryser",
       "description": "Fryseren 1.1kWh",
       "icon": "freezer.png",
       "energyclass": "D",
@@ -133,6 +147,7 @@
 
     {
       "element": "Datamaskin",
+      "template": "datamaskin",
       "description": "Datamaskin 0.3kWh",
       "icon": "electronics.png",
       "energyclass": "",
