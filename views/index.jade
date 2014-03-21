@@ -42,7 +42,7 @@ html(ng-app="powerhack")
       #subfooter
         #sub-category-nav
           .grid
-            a(href='#') A
+            a#a(href='#') A
             a(href='#') B
             a(href='#') C
             a(href='#') D
@@ -53,6 +53,7 @@ html(ng-app="powerhack")
         #footer-content
           p Velkommen
 
+    script(src="/bower_components/momentjs/moment.js")
     script(src="/bower_components/d3/d3.min.js")
     script(src="/bower_components/nvd3/nv.d3.min.js")
     script(src='/bower_components/jquery/dist/jquery.min.js')
