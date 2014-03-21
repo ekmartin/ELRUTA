@@ -9,13 +9,13 @@ var powerhackApp = angular.module('powerhack', []);
 
 powerhackApp.run(function($rootScope) {
 
-  $rootScope.meter = '00afb551a68946bdb0e02fdbd5ac9356';
+  $rootScope.meter = '0704c0b2685a411a9cc69956dedb551e';
   $rootScope.seriesType = 'ActivePlus';
 
 
   // Savings
   $rootScope.saving = {
-    dateFrom: '2011-11-01',
+    dateFrom: '2012-01-01',
     dateTo: '2014-03-20',
     intervalType: 'Day'
   };
@@ -31,5 +31,6 @@ powerhackApp.controller('demo-steinskjer', ['$scope', '$http', '$rootScope',
             graph.addLineGraph(data);
           })
           .error(function(data, status, headers, config) {
+            console.log("feil");
           });
     }]);

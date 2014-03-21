@@ -4,79 +4,78 @@ var chart;
 var changeGraph = 0;
 
 exports.addLineGraph = function(json) {
-  console.log(json);
   var newData = [
     {
       key: 'History',
-      color: '#ff7f0e',
+      color: '#ff0000',
       values: []
     },
     {
       key: 'Predicted',
-      color: '#2ca02c',
+      color: '#00ff00',
       values: []
     },
     {
       key: 'Changed',
-      color: '#2222ff',
+      color: '#0000ff',
       values: []
     }
   ];
 
   for (var key in json) {
-    newData[0].values.push({
-      x: json[key].timeStamp,
-      y: json[key].value
-    });
     var year = moment().year();
     var lastYear = year -1;
-    if (lastYear in json[key].timeStamp) {
+    var timeStamp = moment(json[key].timeStamp, 'YYYY-MM-DD');
+    var modTimeStamp = moment(json[key].timeStamp.replace(String(lastYear), String(year)), 'YYYY-MM-DD');
+    newData[0].values.push({
+      x: timeStamp.unix(),
+      y: json[key].value
+    });
+    if (!modTimeStamp.isBefore()) {
       newData[1].values.push({
-        x: json[key].timeStamp.replace(String(lastYear), String(year)),
+        x: modTimeStamp.unix(),
         y: json[key].value
       });
       newData[2].values.push({
-        x: json[key].timeStamp.replace(String(lastYear), String(year)),
+        x: modTimeStamp.unix(),
         y: json[key].value
       });
     }
   }
+  console.log(newData,"her");
+  nv.addGraph(function() {
+    chart = nv.models.lineWithFocusChart();
 
-  d3.json(newData, function(data) {
-    console.log("2", data);
-    nv.addGraph(function() {
-      chart = nv.models.lineWithFocusChart();
+    chart.transitionDuration(500);
 
-      chart.transitionDuration(500);
+    chart.xAxis
+      .axisLabel('Date')
+      .tickFormat(function(d) {
+          return d3.time.format('%d/%m/%y')(new Date(d*1000));
+      });
+    chart.x2Axis
+      .axisLabel('Date')
+      .tickFormat(function(d) {
+          console.log("d:", d);
+          return d3.time.format('%d/%m/%y')(new Date(d*1000));
+      });
+    chart.yAxis
+        .tickFormat(d3.format('d'));
+    chart.y2Axis
+        .tickFormat(d3.format('d'));
 
-      chart.xAxis
-          .tickFormat(function(d) {
-              return d3.time.format('%d/%m/%y')
-                (moment(d).format('DD/MM/YY')
-              );
-          });
-      chart.x2Axis
-          .tickFormat(d3.format(',f'));
+    d3.select('#graph')
+        .datum(newData)
+        .call(chart);
 
-      chart.yAxis
-          .tickFormat(d3.format(',.2f'));
-      chart.y2Axis
-          .tickFormat(d3.format(',.2f'));
+    nv.utils.windowResize(chart.update);
 
-      console.log("data:", data);
-      d3.select('#graph')
-          .datum(data)
-          .call(chart);
-
-      nv.utils.windowResize(chart.update);
-
-      return chart;
-    });
+    return chart;
   });
-}
+};
 
 exports.updateData = function(change) {
   for (var i in data[changeGraph].values) {
     data[changeGraph].values[i].y += change;
   }
-}
+};
