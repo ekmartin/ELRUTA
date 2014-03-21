@@ -35,7 +35,8 @@ html(ng-app="powerhack")
           a.active(href='') Pie Chart
         li
           a(href='') Histogram
-      svg#graph
+
+      svg(ng-controller='GraphController')#graph
 
     footer
       #category-nav

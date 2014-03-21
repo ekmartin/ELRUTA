@@ -2,28 +2,28 @@ var graph = require('./graph');
 
 var app = angular.module('powerhack', ['ngAnimate', 'LocalStorageModule']);
 
-// app.run(function($rootScope) {
-//
-//   $rootScope.meter = '0704c0b2685a411a9cc69956dedb551e';
-//   $rootScope.seriesType = 'ActivePlus';
-//
-//   // Savings
-//   $rootScope.saving = {
-//     dateFrom: '2012-01-01',
-//     dateTo: '2014-03-20',
-//     intervalType: 'Day'
-//   };
-//
-//   // RealTime
-//   $rootScope.realtime = {
-//     meter: "0e6e348bfdb74432b6709526527c3d12",
-//     date: function() {
-//       return moment().format('YYYY-MM-DD');
-//     },
-//     intervalType: "Minute"
-//   };
-//
-// });
+app.run(function($rootScope) {
+
+  $rootScope.meter = '0704c0b2685a411a9cc69956dedb551e';
+  $rootScope.seriesType = 'ActivePlus';
+
+  // Savings
+  $rootScope.saving = {
+    dateFrom: '2012-01-01',
+    dateTo: '2014-03-20',
+    intervalType: 'Day'
+  };
+
+  // RealTime
+  $rootScope.realtime = {
+    meter: "0e6e348bfdb74432b6709526527c3d12",
+    date: function() {
+      return moment().format('YYYY-MM-DD');
+    },
+    intervalType: "Minute"
+  };
+
+});
 
 var categories = require('./savings.json')
 
@@ -59,7 +59,7 @@ app.controller('MainController', ['$scope', 'localStorageService', function($sco
   };
 }]);
 
-app.controller('demo-steinskjer', ['$scope', '$http', '$rootScope',
+app.controller('GraphController', ['$scope', '$http', '$rootScope',
   function($scope, $http, $rootScope) {
       $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType})
         .success(function(data, status, headers, config) {
