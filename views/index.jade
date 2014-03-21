@@ -32,6 +32,7 @@ html(ng-app="powerhack")
     #content
       svg#graph
 
+<<<<<<< HEAD
     footer
       #category-nav
         .subgrid
@@ -52,6 +53,18 @@ html(ng-app="powerhack")
             a(href='#') H
         #footer-content
           p Velkommen
+      .ui.accordion#acc
+        .active.title#first
+          i.dropdown.icon
+          | Info
+        .active.content
+          p Info om tingen du har valgt å sjekke sparing på (ødelagt js).
+        .title
+          i.dropdown.icon
+          | Mer info
+        .content
+          p Mer info om tingen du har valgt å sjekke sparing på.
+          p(ng-controller="demo-steinskjer")
 
     script(src="/bower_components/momentjs/moment.js")
     script(src="/bower_components/d3/d3.min.js")
