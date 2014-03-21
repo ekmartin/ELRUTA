@@ -1,13 +1,8 @@
 var graph = require('./graph');
 
-$('.ui.accordion').accordion();
+var app = angular.module('powerhack', ['ngAnimate', 'LocalStorageModule']);
 
-
-
-
-var powerhackApp = angular.module('powerhack', []);
-
-powerhackApp.run(function($rootScope) {
+app.run(function($rootScope) {
 
   $rootScope.meter = '0704c0b2685a411a9cc69956dedb551e';
   $rootScope.seriesType = 'ActivePlus';
@@ -18,7 +13,7 @@ powerhackApp.run(function($rootScope) {
     dateFrom: '2012-01-01',
     dateTo: '2014-03-20',
     intervalType: 'Day'
-  };
+
 
   // RealTime
   $rootScope.realtime = {
@@ -31,8 +26,41 @@ powerhackApp.run(function($rootScope) {
 
 });
 
+var categories = require('./savings.json')
 
-powerhackApp.controller('demo-steinskjer', ['$scope', '$http', '$rootScope',
+
+app.controller('MainController', ['$scope', 'localStorageService', function($scope, localStorageService) {
+  var res = {};
+  for (var key in categories) {
+    res[key] = {
+      id: key,
+      name: key,
+      subcategories: categories[key]
+    }
+  }
+
+  $scope.categories = res;
+  $scope.currentCategory = localStorageService.get('currentCategory');
+  $scope.currentSub = null;
+
+  $scope.chooseCategory = function(category) {
+    $scope.currentCategory = category;
+    localStorageService.add('currentCategory', category);
+    $scope.currentSub = null;
+  };
+
+  $scope.chooseSub = function(sub) {
+    $scope.currentSub = sub;
+  };
+
+  $scope.getCurrentSettingsTemplate = function() {
+    if ($scope.currentSub)
+      return "partials/" + $scope.currentCategory.id + "." + $scope.currentSub.element.toLowerCase();
+    return "partials/welcome";
+  };
+};
+
+app.controller('demo-steinskjer', ['$scope', '$http', '$rootScope',
   function($scope, $http, $rootScope) {
       $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType})
         .success(function(data, status, headers, config) {
@@ -45,7 +73,7 @@ powerhackApp.controller('demo-steinskjer', ['$scope', '$http', '$rootScope',
   }
 ]);
 
-powerhackApp.controller('demo-steinskjer-realtime', ['$scope', '$http', '$rootScope',
+app.controller('demo-steinskjer-realtime', ['$scope', '$http', '$rootScope',
   function($scope, $http, $rootScope) {
     var getData = setInterval(function(){
     $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.realtime.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.realtime.date() + '&dateTo=' + $rootScope.realtime.date() + '&intervalType=' + $rootScope.realtime.intervalType})

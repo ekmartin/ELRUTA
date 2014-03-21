@@ -2,6 +2,18 @@
 
 global-reset()
 
+$light = #FBFBFA
+$dark = #312E3F
+$lighter-dark = #7DA5BF
+$reddish = #D66457
+$lightest = #E9E9E7
+
+@font-face
+  font-family 'Montserrat';
+  font-style normal;
+  font-weight 400;
+  src url("/Montserrat.woff") format('woff');
+
 *
   box-sizing border-box
   font-smoothing antialiased
@@ -10,17 +22,16 @@ a
   text-decoration none
 
 html
-  background url('/images/mountains.jpg') no-repeat center center fixed
+  background url('/images/background.jpg') no-repeat center center fixed
   background-size cover
   height 100%
 
 body
-  opacity 0.92
   height 100%
   line-height 2
-  font-family 'Helvetica Neue', Helvetica, sans-serif
+  font-family Montserrat, 'Helvetica Neue', Helvetica, sans-serif
   font-size 16px
-  background-color rgba(249,249,247, 0.8)
+  background-color rgba(249,249,247, 0.3)
   position relative
 
 h1
@@ -32,7 +43,7 @@ header
   position absolute
   height 80px
   padding 10px
-  background #2BB3E5
+  background $dark
   absolute left top right
   top 10px
   left 10px
@@ -44,85 +55,97 @@ header
   right 10px
   top 10px
   height 100%
-  width 10%
+  width 20%
 
-  .grid a
+  a
     display inline-block
     right 20px
-    background #2BB3E5
+    //background #98AD3F
     height 25%
     width 50%
     line-height 60px
     text-align center
-    color #fff
+    color #a1b73e
+    background #252233
+    border-left 2px solid $dark
+    font-size 20px
 
     &:hover
-      background #18637F
       font-weight 700
+      color #fff
 
 #sidebar
   position absolute
   top 100px
   width 15%
   absolute left
-  background #2495BF
+  background $lightest
   padding 20px
   margin-left 10px
-  bottom 210px
+  bottom 220px
 
   .grid a
     display inline-block
-    background #2495BF
+    //background #2495BF
+    background $light
     height 25%
-    width 50%
+    width 100%
     line-height 100px
     text-align center
-    color #fff
+    color #111
+    border 1px solid #ddd
+    border-bottom 0
+
+    &:last-child
+      border-bottom 1px solid #ddd
 
     &:hover
-      background #18637F
+      background #eee
       font-weight 700
 
 #content
-op
   position absolute
   top 100px
   left 15%
   margin-left 20px
-  bottom 210px
+  bottom 220px
   right 10px
   background #fff
+  padding 30px
+
+#graph
+  width 100%
 
 footer
   position absolute
-  height 190px
+  height 200px
   absolute left bottom right
   bottom 10px
 
 #category-nav
-  background #18637F
+  background #cececc
   position absolute
   width 15%
-  height 100%
+  height 200px
   left 10px
   margin-right 10px
 
-  .subgrid a
-    display inline-block
-    background #18637F
-    height 25%
-    width 50%
-    line-height 95px
-    text-align center
-    color #fff
+  a
+    display block
+    color #333
+    height 50px
+    line-height 50px
+    padding-right 25px
+    text-align right
+    background linear-gradient(#ddd, #ccc)
 
-    &:hover
-      background #2c3e50
+    &:hover, &.active
+      background linear-gradient(#fff, #eee)
       font-weight 700
 
 #subfooter
   position absolute
-  height 190px
+  height 200px
   absolute left bottom right
   left 15%
   margin-left 20px
@@ -130,26 +153,73 @@ footer
 #sub-category-nav
   position absolute
   width 50%
-  background #2BB3E5
+  background rgba(168, 191, 57, .9)
+  height 200px
 
   .grid a
     display inline-block
-    background #2BB3E5
-    height 50%
+    height 100px
     width 25%
-    line-height 95px
+    line-height 100px
     text-align center
-    color #fff
+    color #222
+    font-size 22px
+    padding-top 10px
+
+    img
+      height 40px
+      width 40px
 
     &:hover
-      background #18637F
       font-weight 700
+      color #fff
 
 #footer-content
   position absolute
-  background #bdc3c7
+  //background #bdc3c7
+  background rgba(255, 255, 255, .8)
   padding 20px
   left 50%
   height 100%
   margin-left 10px
   right 10px
+
+  h2
+    font-weight bold
+    border-bottom 1px solid #ccc
+    text-align right
+
+.consumption
+  text-align center
+  margin-top 10px
+  color #666
+
+  span
+    color #333
+    margin-left 6px
+
+.form
+  margin-top 20px
+
+.settings
+  position relative
+
+  &.ng-leave, &.ng-enter
+    transition all .6s
+
+  &.ng-enter
+    opacity 0
+    z-index 50
+
+  &.ng-enter.ng-enter-active
+    opacity 1
+
+  &.ng-leave
+    opacity 1
+    z-index 200
+
+  &.ng-leave.ng-leave-active
+    opacity 0
+    height 0
+
+@import 'tabs'

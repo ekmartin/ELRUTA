@@ -5,66 +5,51 @@ html(ng-app="powerhack")
     title PowerHack
     //link(rel='stylesheet' href='/bower_components/semantic/build/packaged/css/semantic.min.css')
     link(rel='stylesheet' href='/bower_components/nvd3/nv.d3.min.css')
+    link(rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.min.css')
     link(rel='stylesheet' href='/css/style.css')
 
-  body
+  body(ng-controller='MainController')
     header
-      h1 Powerhack - Strømshiat
+      h1 Strømoversikt
       #navbar-content
-        .grid
-          a(href='#') OM
-          a(href='#') INFO
+        div
+          a(href='#')
+            i.fa.fa-map-marker
+          a(href='#')
+            i.fa.fa-info
 
     #sidebar
       .grid
-        a(href='#') A
-        a(href='#') B
-        a(href='#') C
-        a(href='#') D
-        a(href='#') E
-        a(href='#') F
+        a(href='#') Live
+        a(href='#') Sparing
+        a(href='#') Naboen
 
       #sidebar-content
-      p Mordi er mann
-      p Mordi er mann
-      p Mordi er mann
+        .consumption
+          p Forbruk
+            span 6434 kWh
 
     #content
+      ul.tabs
+        li
+          a.active(href='') Pie Chart
+        li
+          a(href='') Histogram
       svg#graph
 
     footer
       #category-nav
-        .subgrid
-          a(href='#') World
-          a(href='#') Editor
-          a(href='#') World
-          a(href='#') Editor
+        a(href='' ng-repeat='category in categories', ng-click='chooseCategory(category)', ng-class='{active: (currentCategory == category)}') {{category.name}}
+
       #subfooter
         #sub-category-nav
           .grid
-            a#a(href='#') A
-            a(href='#') B
-            a(href='#') C
-            a(href='#') D
-            a(href='#') E
-            a(href='#') F
-            a(href='#') G
-            a(href='#') H
+            //a(href='' ng-repeat='sub in currentCategory.subcategories', ng-click='chooseSub(sub)') {{sub.element}}
+            a(href='' ng-repeat='sub in currentCategory.subcategories', ng-click='chooseSub(sub)')
+              img.icon(src='/images/{{sub.icon}}', alt='{{sub.element}}')
+
         #footer-content
-          p Velkommen
-      .ui.accordion#acc
-        .active.title#first
-          i.dropdown.icon
-          | Info
-        .active.content
-          p Info om tingen du har valgt å sjekke sparing på (ødelagt js).
-        .title
-          i.dropdown.icon
-          | Mer info
-        .content
-          p Mer info om tingen du har valgt å sjekke sparing på.
-          p(ng-controller="demo-steinskjer")
-          p(ng-controller="demo-steinskjer-realtime")
+          div.settings(ng-include='getCurrentSettingsTemplate()')
 
     script(src="/bower_components/momentjs/moment.js")
     script(src="/bower_components/d3/d3.min.js")
@@ -74,4 +59,6 @@ html(ng-app="powerhack")
     script(src='/bower_components/angular/angular.min.js')
     script(src='/bower_components/angular-resource/angular-resource.min.js')
     script(src='/bower_components/angular-route/angular-route.min.js')
+    script(src='/bower_components/angular-animate/angular-animate.min.js')
+    script(src='/bower_components/angular-local-storage/angular-local-storage.min.js')
     script(src='/app.js')

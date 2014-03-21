@@ -28,6 +28,10 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
+app.get('/partials/:partial', function(req, res) {
+  res.render('partials/' + req.param('partial').replace('.', '/'));
+});
+
 require('./lib/api')(app);
 
 app.listen(app.get('port'), function() {
