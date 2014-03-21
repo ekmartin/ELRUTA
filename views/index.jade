@@ -5,40 +5,46 @@ html(ng-app="powerhack")
     title PowerHack
     //link(rel='stylesheet' href='/bower_components/semantic/build/packaged/css/semantic.min.css')
     link(rel='stylesheet' href='/bower_components/nvd3/nv.d3.min.css')
+    link(rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.min.css')
     link(rel='stylesheet' href='/css/style.css')
 
   body
     header
-      h1 Powerhack - Strømshiat
+      h1 Strømoversikt
       #navbar-content
-        .grid
-          a(href='#') OM
-          a(href='#') INFO
+        div
+          a(href='#')
+            i.fa.fa-map-marker
+          a(href='#')
+            i.fa.fa-info
 
     #sidebar
       .grid
-        a(href='#') A
-        a(href='#') B
-        a(href='#') C
-        a(href='#') D
-        a(href='#') E
-        a(href='#') F
+        a(href='#') Live
+        a(href='#') Sparing
+        a(href='#') Naboen
 
       #sidebar-content
-      p Mordi er mann
-      p Mordi er mann
-      p Mordi er mann
+        .consumption
+          p Forbruk
+            span 6434 kWh
+          p
 
     #content
+      ul.tabs
+        li
+          a.active(href='') Pie Chart
+        li
+          a(href='') Histogram
       svg#graph
 
     footer
       #category-nav
-        .subgrid
-          a(href='#') World
-          a(href='#') Editor
-          a(href='#') World
-          a(href='#') Editor
+        a(href='#') Vann
+        a(href='#') Varme
+        a(href='#') Elektronikk
+        a(href='#') Annet
+
       #subfooter
         #sub-category-nav
           .grid
