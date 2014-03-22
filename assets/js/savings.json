@@ -3,7 +3,7 @@
     {
       "element": "Dusj",
       "template": "dusj",
-      "description": "Dusjer du lenge? Har du sparedusjhode? Det kan være påvirke stort på vannforbruket!",
+      "description": "Dusjer du lenge uten sparedusjhode? Det kan påvirke stort på vannforbruket!",
       "icon": "shower.png"
     },
 
@@ -47,7 +47,7 @@
     {
       "element": "Isolasjon",
       "template": "isolasjon",
-      "description": "Dersom du etter-isolerer huset ditt vil det føre til sparte kostnader i oppvarming over tid, samt øke verdien på boligen ved bedre energiklasse!",
+      "description": "Dersom du etterisolerer huset ditt vil det føre til sparte kostnader i oppvarming over tid, samt øke verdien på boligen ved bedre energiklasse!",
       "icon": "insulation.png",
     },
 
