@@ -103,13 +103,13 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   $scope.kwhPrice = 40.5;
   $scope.calculateEarned = function(kwh, days) { // kwh: kwh du sparer, days: hvor lenge du skal spare, returnerer sparte kroner
     return (($scope.kwhPrice/100) * kwh * days);
-  }
+  };
 
   $scope.calculatePrice = function(data) {
     return data.reduce(function(total, value) {
       return total + ($scope.kwhPrice/100 * value);
     });
-  }
+  };
 
   $scope.graphTypes = ['Sparing', 'Live'];
   $scope.loadLiveDataFunction = function(){
@@ -158,7 +158,6 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
       $scope.loadLiveData();
     }
   };
-
 
   // Load graphs
   $scope.loadDataFunction();
