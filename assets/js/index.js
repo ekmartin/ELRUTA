@@ -83,6 +83,16 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
 
   $scope.factor = 0;
 
+  function proposeSavings(wanted) {
+    proposed = [];
+    for (key in $scope.switches) {
+      $scope.switches[key][1] = true;
+      proposed.push(key);
+      if ($scope.estimatedNextMonth() <= wanted) break;
+    }
+    return proposed;
+  }
+
   $scope.$watch('switches', function() {
     $scope.factor = 1 - Object.keys($scope.switches).reduce(function(accumulated, key) {
       return !!$scope.switches[key][1]
@@ -155,7 +165,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     });
   };
 
-  $scope.graphTypes = ['Sparing', 'Live'];
+  $scope.graphTypes = ['Sparing', 'Live', 'Årsforbruk'];
   $scope.loadLiveDataFunction = function(){
     $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.realtime.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.realtime.date() + '&dateTo=' + $rootScope.realtime.date() + '&intervalType=' + $rootScope.realtime.intervalType})
       .success(function(data, status, headers, config) {
@@ -166,15 +176,23 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
       });
   };
 
+  $scope.data = null;
+
   $scope.loadDataFunction = function() {
-    $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType})
-      .success(function(data, status, headers, config) {
-        $scope.calculateNextMonth(data);
-        graph.addLineGraph(data);
-      })
-      .error(function(data, status, headers, config) {
-        console.log(arguments);
+    if ($scope.data != null) {
+      graph.addLineGraph($scope.data);
+    }
+    else {
+      $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType})
+        .success(function(data, status, headers, config) {
+          $scope.data = data;
+          $scope.calculateNextMonth(data);
+          graph.addLineGraph(data);
+        })
+        .error(function(data, status, headers, config) {
+          console.log(arguments);
       });
+    }
   };
 
   var stop;
@@ -193,6 +211,23 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     }
   };
 
+  $scope.loadYearly = function() {
+    if ($scope.data != null) {
+      graph.addYearlyGraph($scope.data);
+    }
+    else {
+      $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType})
+        .success(function(data, status, headers, config) {
+          $scope.data = data;
+          $scope.calculateNextMonth(data);
+          graph.addYearlyGraph(data);
+        })
+        .error(function(data, status, headers, config) {
+          console.log(arguments);
+      });
+    }
+  }
+
   $scope.changeGraphMode = function(mode) {
     if (mode === 'Sparing'){
       $scope.stopLiveData();
@@ -200,6 +235,9 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     }
     else if (mode === 'Live'){
       $scope.loadLiveData();
+    }
+    else if (mode === 'Årsforbruk') {
+      $scope.loadYearly();
     }
   };
 
