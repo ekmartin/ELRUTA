@@ -45,8 +45,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   $rootScope.loadDefaultValues = function() {
     $http({method: 'GET', url: '/api/demo-steinkjer-general.json?meter=' + $rootScope.meter})
       .success(function(data, status, headers, config) {
-        $scope.meterValue = data.lastValue;
-        console.log(data.usageLastYear, "DUE ER HER!!");
+        $scope.meterValue = data.lastValue / 1000;
         $scope.yearUsage = data.usageLastYear/1000;
 
       })
@@ -93,8 +92,8 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   }, true);
 
   var meterValueTimer = function() {
-    $scope.meterValue += 1;
-    $timeout(meterValueTimer, 3000);
+    $scope.meterValue += 0.001;
+    $timeout(meterValueTimer, 1000);
   };
 
   meterValueTimer();
@@ -124,6 +123,26 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     return (($scope.kwhPrice/100) * kwh * days);
   };
 
+  // Kalkuler pris neste måned
+  $scope.calculateNextMonth = function(data){
+    var totalKiloWatt = 0;
+    for (var i = 0; i<data.length; i++) {
+      var value = data[i];
+      var today = new Date();
+      var month = today.getMonth()+2;
+      if (month>12){
+        month = 1;
+      }
+      var prefix = '-';
+      if (month >= 1 && month <=9){prefix = '-0'}
+      if (value.timeStamp.indexOf(((today.getYear() + 1900)-1) + prefix + month) != -1) {
+        totalKiloWatt += value.value;
+      }
+    }
+    $scope.nextMonth = $scope.calculateEarned(totalKiloWatt, 1);
+  };
+
+
   $scope.calculatePrice = function(data) {
     return data.reduce(function(total, value) {
       return total + ($scope.kwhPrice/100 * value);
@@ -144,7 +163,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   $scope.loadDataFunction = function() {
     $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType})
       .success(function(data, status, headers, config) {
-        console.log("ingenting", '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType);
+        $scope.calculateNextMonth(data);
         graph.addLineGraph(data);
       })
       .error(function(data, status, headers, config) {
