@@ -21,6 +21,9 @@ $lightest = #E9E9E7
 a
   text-decoration none
 
+svg text
+  font 12px Montserrat
+
 html
   background url('/images/background.jpg') no-repeat center center fixed
   background-size cover
@@ -154,6 +157,12 @@ footer
     text-align right
     background linear-gradient(#ddd, #ccc)
 
+    img
+      height 40px
+      padding-top 10px
+      float left
+      padding-left 20px
+
     &:hover, &.active
       background linear-gradient(#fff, #eee)
       font-weight 700
@@ -259,5 +268,10 @@ footer
     opacity 0
     height 0
 
+.hide
+  display none
+
+.large-page
+  bottom 10px !important
+
 @import 'tabs'
-@import 'pace'
