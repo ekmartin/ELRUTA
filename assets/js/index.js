@@ -58,27 +58,20 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   $scope.categories = res;
   $scope.currentCategory = localStorageService.get('currentCategory');
   $scope.currentSub = null;
-  $scope.sliderValue = 0;
-
-
 
   $scope.household = {
     persons: 2,
     rooms: 4
   };
 
-  $scope.powerSavings = {
-    shower: 0.02,
+  $scope.switches = {
+    shower: [0.02, false],
   };
 
-  $scope.switches = {
-    shower: 0,
-  };
-  
   $scope.$watch('switches', function() {
-    var factor = 1 - Object.keys($scope.powerSavings).reduce(function(accumulated, key) {
-      return !!$scope.switches[key]
-        ? accumulated + $scope.powerSavings[key]
+    var factor = 1 - Object.keys($scope.switches).reduce(function(accumulated, key) {
+      return !!$scope.switches[key][1]
+        ? accumulated + $scope.switches[key][0]
         : accumulated;
     }, 0);
 
