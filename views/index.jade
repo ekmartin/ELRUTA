@@ -18,9 +18,9 @@ html(ng-app="powerhack")
           label Personer
           label Rom
           br
-          
-          input(type='number', ng-model='household.persons')
-          input(type='number', ng-model='household.rooms')
+
+          input(type='number', ng-model='household.persons', min='0')
+          input(type='number', ng-model='household.rooms', min='0')
 
     #sidebar
       .grid
@@ -30,9 +30,9 @@ html(ng-app="powerhack")
       #sidebar-content
         .consumption
           p Forbruk
-            span 6434 kWh
+            span {{yearUsage}} kWh
           p Målerverdi
-            span {{meterValue}} kWh
+            span {{meterValue}} Wh
 
     #content
       ul.tabs

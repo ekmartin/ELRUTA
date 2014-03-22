@@ -2,7 +2,7 @@ var graph = require('./graph');
 
 var app = angular.module('powerhack', ['ngAnimate', 'LocalStorageModule']);
 
-app.run(function($rootScope) {
+app.run(function($rootScope, $http) {
 
   $rootScope.meter = '0704c0b2685a411a9cc69956dedb551e';
   $rootScope.seriesType = 'ActivePlus';
@@ -23,6 +23,7 @@ app.run(function($rootScope) {
     intervalType: "Minute"
   };
 
+
 });
 
 var categories = require('./savings.json')
@@ -38,16 +39,38 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     }
   }
 
+  $scope.meterValue = 0;
+
+  //Load default values from api
+  $rootScope.loadDefaultValues = function() {
+    $http({method: 'GET', url: '/api/demo-steinkjer-general.json?meter=' + $rootScope.meter})
+      .success(function(data, status, headers, config) {
+        $scope.meterValue = data.lastValue;
+        console.log(data.usageLastYear, "DUE ER HER!!");
+        $scope.yearUsage = data.usageLastYear/1000;
+
+      })
+      .error(function(data, status, headers, config) {
+      });
+  };
+  $rootScope.loadDefaultValues();
+
   $scope.categories = res;
   $scope.currentCategory = localStorageService.get('currentCategory');
   $scope.currentSub = null;
 
-  $scope.meterValue = 6500120;
+
 
   $scope.household = {
     persons: 2,
     rooms: 4
   };
+
+  $scope.changeFactor = 1.0;
+
+  $scope.$watch('changeFactor', function() {
+    graph.updateData(Math.max(0.1, $scope.changeFactor));
+  });
 
   var meterValueTimer = function() {
     $scope.meterValue += 1;
