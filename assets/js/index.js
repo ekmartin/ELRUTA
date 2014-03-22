@@ -58,6 +58,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   $scope.categories = res;
   $scope.currentCategory = localStorageService.get('currentCategory');
   $scope.currentSub = null;
+  $scope.sliderValue = 0;
 
 
 
@@ -78,6 +79,10 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   };
 
   meterValueTimer();
+
+  $scope.updateGraph = function(value) {
+    graph.updateData(value);
+  };
 
   $scope.chooseCategory = function(category) {
     $scope.currentCategory = category;

@@ -55,7 +55,7 @@
     {
       "element": "Fyring",
       "template": "fyring",
-      "decription": "Det er mye snakk om effektiviteten til varmepumpene, bruk slideren nedenfor for å se forbruk før og etter installasjon!",
+      "description": "Det er mye snakk om effektiviteten til varmepumpene, bruk slideren nedenfor for å se forbruk før og etter installasjon!",
       "icon": "heating.png",
       "baselevel": 0.6,
       "averagepowerconsumption": "60% av total kwh",
@@ -116,7 +116,7 @@
     {
       "element": "Lyssensor",
       "template": "lyssensor",
-      "decription": "Har du utebelysning? Da kan det lønne seg å installere en lyssensor som registrer om det er mørkt!",
+      "description": "Har du utebelysning? Da kan det lønne seg å installere en lyssensor som registrer om det er mørkt!",
       "icon": "moon.png",
       "baselevel": 16,
       "powerconsumption": "~5W",
