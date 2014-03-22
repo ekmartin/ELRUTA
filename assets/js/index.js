@@ -45,8 +45,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   $rootScope.loadDefaultValues = function() {
     $http({method: 'GET', url: '/api/demo-steinkjer-general.json?meter=' + $rootScope.meter})
       .success(function(data, status, headers, config) {
-        $scope.meterValue = data.lastValue;
-        console.log(data.usageLastYear, "DUE ER HER!!");
+        $scope.meterValue = data.lastValue / 1000;
         $scope.yearUsage = data.usageLastYear/1000;
 
       })
@@ -96,8 +95,8 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   }, true);
 
   var meterValueTimer = function() {
-    $scope.meterValue += 1;
-    $timeout(meterValueTimer, 3000);
+    $scope.meterValue += 0.001;
+    $timeout(meterValueTimer, 1000);
   };
 
   meterValueTimer();
@@ -156,9 +155,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     });
   };
 
-  $scope.graphTypes = ['Sparing', 'Live', 'Årsforbruk'];
-  $scope.data = null;
-
+  $scope.graphTypes = ['Sparing', 'Live'];
   $scope.loadLiveDataFunction = function(){
     $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.realtime.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.realtime.date() + '&dateTo=' + $rootScope.realtime.date() + '&intervalType=' + $rootScope.realtime.intervalType})
       .success(function(data, status, headers, config) {
@@ -169,15 +166,17 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
       });
   };
 
+  $scope.data = null;
+
   $scope.loadDataFunction = function() {
     if ($scope.data != null) {
-      graph.addLineGraph($scope.data);
+      graph.addLineGraph(data);
     }
     else {
       $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType})
         .success(function(data, status, headers, config) {
-          console.log("ingenting", '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType);
           $scope.data = data;
+          $scope.calculateNextMonth(data);
           graph.addLineGraph(data);
         })
         .error(function(data, status, headers, config) {
@@ -201,6 +200,11 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
       stop = undefined;
     }
   };
+
+  $scope.loadYearly = function() {
+    if (angular.isDefined(stop)) return;
+
+  }
 
   $scope.changeGraphMode = function(mode) {
     if (mode === 'Sparing'){
