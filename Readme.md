@@ -2,7 +2,7 @@
 
 MIT Dropouts' bidrag til Demo Steinkjers Hackathon, PowerHack 2014.
 
-*Screenshots:* 
+**Screenshots:**
 
 http://i.imgur.com/iPlGTHh.png
 
