@@ -191,6 +191,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
         .success(function(data, status, headers, config) {
           $scope.data = data;
           $scope.calculateNextMonth(data);
+          $scope.wantedPrice = parseInt($scope.estimatedNextMonth());
           graph.addLineGraph(data);
         })
         .error(function(data, status, headers, config) {
