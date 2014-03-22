@@ -83,26 +83,32 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
 
   $scope.factor = 0;
 
-  function proposeSavings(wanted) {
+  $scope.proposeSavings = function(wanted) {
     proposed = [];
     for (key in $scope.switches) {
       $scope.switches[key][1] = true;
+      factorUpdate();
       proposed.push(key);
-      if ($scope.estimatedNextMonth() <= wanted) break;
+      console.log("her", $scope.estimatedNextMonth(), key, $scope.switches[key]);
+      if ($scope.estimatedNextMonth() <= wanted) {
+        break;
+      }
     }
     return proposed;
   }
 
-  $scope.$watch('switches', function() {
+  function factorUpdate() {
     $scope.factor = 1 - Object.keys($scope.switches).reduce(function(accumulated, key) {
       return !!$scope.switches[key][1]
         ? accumulated + $scope.switches[key][0]
         : accumulated;
     }, 0);
-
+    console.log("changing switch");
     graph.updateData($scope.factor);
     $scope.estimatedNextMonth();
-  }, true);
+  }
+
+  $scope.$watch('switches', factorUpdate, true);
 
   var meterValueTimer = function() {
     $scope.meterValue += 0.001;
@@ -188,6 +194,8 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
           $scope.data = data;
           $scope.calculateNextMonth(data);
           graph.addLineGraph(data);
+          angular.element(document.querySelector('head')).append($compile("")(scope)); // Found here : http://stackoverflow.com/a/11913182/1662766
+
         })
         .error(function(data, status, headers, config) {
           console.log(arguments);
@@ -240,6 +248,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
       $scope.loadYearly();
     }
   };
+
 
   // Load graphs
   $scope.loadDataFunction();
