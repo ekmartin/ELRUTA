@@ -48,7 +48,7 @@ exports.addLineGraph = function(json) {
   data = [
     {
       key: 'History',
-      color: '#ff0000',
+      color: '#312e3f',
       values: []
     },
     {
@@ -129,7 +129,7 @@ exports.updateLiveData = function(json) {
     var timeStamp = moment(json[i].timeStamp);
     realtimeData[0].values.push({
       x: timeStamp.unix(),
-      y: json[i].value*1000
+      y: json[i].value
     });
   }
   console.log("new data:", realtimeData);
