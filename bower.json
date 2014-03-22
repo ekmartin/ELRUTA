@@ -26,6 +26,7 @@
     "font-awesome": "~4.0.3",
     "angular-ui-router": "~0.2.10",
     "angular-local-storage": "~0.0.1",
-    "pace": "~0.5.1"
+    "pace": "~0.5.1",
+    "css-toggle-switch": "~2.1.5"
   }
 }
