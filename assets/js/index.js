@@ -23,6 +23,7 @@ app.run(function($rootScope, $http) {
     intervalType: "Minute"
   };
 
+  $rootScope.paceCss = '/css/pace.default.css';
 
 });
 
@@ -77,8 +78,9 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     cooler: [0.01, false],
     heat: [0.175, false],
     insulation: [0.175, false],
-    curtains: [0.025, false]
-
+    curtains: [0.025, false],
+    temp: [0.01, false],
+    vacuum: [0.002, false]
   };
 
   $scope.factor = 0;
@@ -239,6 +241,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
       $scope.loadDataFunction();
     }
     else if (mode === 'Live'){
+      $rootScope.paceCss = '/css/pace.simple.css';
       $scope.loadLiveData();
     }
     else if (mode === 'Årsforbruk') {

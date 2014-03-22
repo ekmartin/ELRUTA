@@ -85,12 +85,22 @@ header
 #sidebar
   position absolute
   top 100px
-  width 15%
+  width 20%
   absolute left
   background $lightest
   padding 20px
   margin-left 10px
   bottom 220px
+
+  input
+    padding 6px 10px
+    font-size 16px
+    border 0
+    border-bottom 3px solid #ddd
+    width 100px
+
+    &:focus
+      outline none
 
   .grid a
     display inline-block
@@ -114,7 +124,7 @@ header
 #content
   position absolute
   top 100px
-  left 15%
+  left 20%
   margin-left 20px
   bottom 220px
   right 10px
@@ -133,7 +143,7 @@ footer
 #category-nav
   background #cececc
   position absolute
-  width 15%
+  width 20%
   height 200px
   left 10px
   margin-right 10px
@@ -155,7 +165,7 @@ footer
   position absolute
   height 200px
   absolute left bottom right
-  left 15%
+  left 20%
   margin-left 20px
 
 #sub-category-nav
@@ -166,13 +176,13 @@ footer
 
   .grid a
     display inline-block
-    height 100px
+    height 200px
     width 25%
-    line-height 100px
+    line-height 200px
     text-align center
     color #222
     font-size 22px
-    padding-top 10px
+    padding-top 20px
     border-bottom 1px solid rgba(168, 191, 120, 1)
     border-right 1px solid rgba(168, 191, 120, 1)
 
@@ -180,8 +190,8 @@ footer
       border-right 0
 
     img
-      height 40px
-      width 40px
+      height 60px
+      width 60px
 
     &:hover, &.active
       font-weight 700
@@ -204,7 +214,7 @@ footer
   h2
     font-weight bold
     border-bottom 1px solid #ccc
-    text-align right
+    text-align left
 
   .toggle
     width 50%
@@ -217,13 +227,15 @@ footer
     background-color: rgb(168, 191, 57)
 
 .consumption
-  text-align center
+  text-align left
   margin-top 10px
   color #666
+  padding 10px
 
-  span
+  span, input
     color #333
     margin-left 6px
+    float right
 
 .form
   margin-top 20px
@@ -251,4 +263,3 @@ footer
     height 0
 
 @import 'tabs'
-@import 'pace'
