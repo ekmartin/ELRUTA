@@ -27,7 +27,7 @@ app.run(function($rootScope, $http) {
 
 });
 
-var categories = require('./savings.json')
+var categories = require('./savings.json');
 
 
 app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '$rootScope', '$http', '$interval', function($scope, $timeout, localStorageService, $rootScope, $http, $interval) {
@@ -37,7 +37,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
       id: key,
       name: key,
       subcategories: categories[key]
-    }
+    };
   }
 
   $scope.meterValue = 0;
@@ -88,19 +88,18 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
 
   $scope.proposeSavings = function() {
     proposed = [];
-    for (key in $scope.switches) {
+    for (var key in $scope.switches) {
       $scope.switches[key][1] = true;
       updateFactor();
       proposed.push(key);
       if ($scope.estimatedNextMonth() <= $scope.wantedPrice) break;
     }
     return proposed;
-  }
+  };
 
   function updateFactor() {
     $scope.factor = 1 - Object.keys($scope.switches).reduce(function(accumulated, key) {
-      return !!$scope.switches[key][1]
-        ? accumulated + $scope.switches[key][0]
+      return !!$scope.switches[key][1] ? accumulated + $scope.switches[key][0]
         : accumulated;
     }, 0);
     console.log("changing switch");
@@ -153,7 +152,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
         month = 1;
       }
       var prefix = '-';
-      if (month >= 1 && month <=9){prefix = '-0'}
+      if (month >= 1 && month <=9){prefix = '-0';}
       if (value.timeStamp.indexOf(((today.getYear() + 1900)-1) + prefix + month) != -1) {
         totalKiloWatt += value.value;
       }
@@ -236,7 +235,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
           console.log(arguments);
       });
     }
-  }
+  };
 
   $scope.changeGraphMode = function(mode) {
     $scope.currentView = mode;
@@ -249,6 +248,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
       $scope.loadLiveData();
     }
     else if (mode === 'Årsforbruk') {
+      $scope.stopLiveData();
       $scope.loadYearly();
     }
   };
