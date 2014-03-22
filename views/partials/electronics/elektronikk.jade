@@ -1,11 +1,11 @@
-h2 Badekar
+h2 Elektronikk
 
 p {{currentSub.description}}
 
 div.form.toggle
   label(class='switch-light switch-candy togglelabel')
-    input(type='checkbox')
+    input(type='checkbox' ng-model='switches.electronics[1]')
     span(style='color:black;') Modus
-      span(class='toggle') Bruker
-      span(class='toggle') Bruker ikke
+      span(class='toggle') På
+      span(class='toggle') Av
     a(href='#' class='toggleslider')

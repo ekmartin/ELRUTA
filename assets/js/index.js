@@ -66,16 +66,33 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
 
   $scope.switches = {
     shower: [0.02, false],
+    washer: [0.01, false],
+    wash: [0.01, false],
+    dishwasher: [0.01, false],
+    light: [0.03, false],
+    dim: [0.01, false],
+    brain: [0.01, false],
+    lightsensor: [0.015, false],
+    electronics: [0.015, false],
+    freezer: [0.01, false],
+    cooler: [0.01, false],
+    heat: [0.175, false],
+    insulation: [0.175, false],
+    curtains: [0.025, false]
+
   };
 
+  $scope.factor = 0;
+
   $scope.$watch('switches', function() {
-    var factor = 1 - Object.keys($scope.switches).reduce(function(accumulated, key) {
+    $scope.factor = 1 - Object.keys($scope.switches).reduce(function(accumulated, key) {
       return !!$scope.switches[key][1]
         ? accumulated + $scope.switches[key][0]
         : accumulated;
     }, 0);
 
-    graph.updateData(factor);
+    graph.updateData($scope.factor);
+    $scope.estimatedNextMonth();
   }, true);
 
   var meterValueTimer = function() {
@@ -109,6 +126,29 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   $scope.calculateEarned = function(kwh, days) { // kwh: kwh du sparer, days: hvor lenge du skal spare, returnerer sparte kroner
     return (($scope.kwhPrice/100) * kwh * days);
   };
+
+  // Kalkuler pris neste måned
+  $scope.calculateNextMonth = function(data){
+    var totalKiloWatt = 0;
+    for (var i = 0; i<data.length; i++) {
+      var value = data[i];
+      var today = new Date();
+      var month = today.getMonth()+2;
+      if (month>12){
+        month = 1;
+      }
+      var prefix = '-';
+      if (month >= 1 && month <=9){prefix = '-0'}
+      if (value.timeStamp.indexOf(((today.getYear() + 1900)-1) + prefix + month) != -1) {
+        totalKiloWatt += value.value;
+      }
+    };
+    $scope.nextMonth = $scope.calculateEarned(totalKiloWatt, 1);
+    $scope.estimatedNextMonth = function() {
+      return $scope.nextMonth * $scope.factor;
+    };
+  };
+
 
   $scope.calculatePrice = function(data) {
     return data.reduce(function(total, value) {

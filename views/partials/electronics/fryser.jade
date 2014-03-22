@@ -4,8 +4,8 @@ p {{currentSub.description}}
 
 div.form.toggle
   label(class='switch-light switch-candy togglelabel')
-    input(type='checkbox')
+    input(type='checkbox' ng-model='switches.freezer[1]')
     span(style='color:black;') Modus
-      span(class='toggle') Ny
       span(class='toggle') Gammel
+      span(class='toggle') Ny
     a(href='#' class='toggleslider')

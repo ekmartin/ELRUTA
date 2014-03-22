@@ -11,16 +11,6 @@
     },
 
     {
-      "element": "Badekar",
-      "template": "badekar",
-      "description": "Det å bruke badekar konsumerer mer vann enn dusjing, begrens bruken og la det være litt luksus en gang i blant!",
-      "icon": "bathtub.png",
-      "baselevel": 0,
-      "averagewaterusage": 200,
-      "sliderconstant": 7
-    },
-
-    {
       "element": "Vaskemaskin",
       "template": "vaskemaskin",
       "description": "Man kan enkelt spare penger ved riktig bruk av vaskemaskinen. Bruk eco-program og fyll opp vaskemaskinen! (Det vasker like bra!)",
@@ -63,11 +53,11 @@
     },
 
     {
-      "element": "Stekeovn",
-      "template": "stekeovn",
-      "description": "Bruk av stekeovn",
-      "icon": "stove.png",
-      "averagepowerconsumption": "Bruk av stekeovn",
+      "element": "Gardiner",
+      "template": "gardiner",
+      "description": "Effektiv bruk av gardiner forhindrer noe av varmetapet som vinduer står for!",
+      "icon": "curtains.png",
+      "averagepowerconsumption": "0",
       "sliderconstant": 10
     },
 
@@ -146,9 +136,9 @@
     },
 
     {
-      "element": "Datamaskin",
-      "template": "datamaskin",
-      "description": "Skrur du av datamaskinen etter du har brukt den? Det kan være dumt for strømregninga!",
+      "element": "Elektronikk",
+      "template": "elektronikk",
+      "description": "Skrur du ikke det elektroniske utstyret ditt helt av etter du har brukt det? Det kan være dumt for strømregninga!",
       "icon": "computer.png",
       "energyclass": "",
       "powerconsumtion": 0.3,
