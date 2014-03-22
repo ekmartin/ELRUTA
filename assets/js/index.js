@@ -44,6 +44,11 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
 
   $scope.meterValue = 6500120;
 
+  $scope.household = {
+    persons: 2,
+    rooms: 4
+  };
+
   var meterValueTimer = function() {
     $scope.meterValue += 1;
     $timeout(meterValueTimer, 3000);
@@ -94,6 +99,17 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
       .error(function(data, status, headers, config) {
       });
   };
+  $scope.loadDataFunction = function() {
+    $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType})
+      .success(function(data, status, headers, config) {
+        console.log("ingenting", '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType);
+        graph.addLineGraph(data);
+      })
+      .error(function(data, status, headers, config) {
+        console.log("feil");
+      });
+  };
+
   var stop;
   $scope.loadLiveData = function(){
     if ( angular.isDefined(stop) ) return;
@@ -113,21 +129,17 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   $scope.changeGraphMode = function(mode) {
     if (mode === 'Sparing'){
       $scope.stopLiveData();
-
-      $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType})
-        .success(function(data, status, headers, config) {
-          console.log("ingenting", '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType);
-          graph.addLineGraph(data);
-        })
-        .error(function(data, status, headers, config) {
-          console.log("feil");
-        });
+      $scope.loadDataFunction();
     }
     else if (mode === 'Live'){
       $scope.loadLiveData();
     }
   };
 
+
+  // Load graphs
+  $scope.loadLiveDataFunction();
+  $scope.loadDataFunction();
 
 }]);
 

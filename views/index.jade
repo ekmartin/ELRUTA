@@ -4,7 +4,7 @@ html(ng-app="powerhack")
     meta(charset='utf-8')
     title PowerHack
 
-    script(src="/bower_components/pace/pace.min.js")
+    script(data-pace-options='{ "restartOnRequestAfter": false }', src="/bower_components/pace/pace.min.js")
     link(rel='stylesheet' href='/bower_components/nvd3/nv.d3.min.css')
     link(rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.min.css')
     link(rel='stylesheet' href='/css/style.css')
@@ -15,10 +15,12 @@ html(ng-app="powerhack")
       h1 Strømoversikt
       #navbar-content
         div
-          a(href='#')
-            i.fa.fa-map-marker
-          a(href='#')
-            i.fa.fa-info
+          label Personer
+          label Rom
+          br
+          
+          input(type='number', ng-model='household.persons')
+          input(type='number', ng-model='household.rooms')
 
     #sidebar
       .grid
