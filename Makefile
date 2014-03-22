@@ -1,7 +1,7 @@
 ICONS=$(shell find assets/images -name "*.orig.png")
 
 install:
-	bower install
+	node_modules/bower/bin/bower install
 	npm install
 
 server:
