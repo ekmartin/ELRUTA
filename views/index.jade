@@ -30,10 +30,12 @@ html(ng-app="powerhack")
 
       #sidebar-content
         .consumption
-          p Forbruk
-            span {{yearUsage}} kWh
+          p Årsforbruk
+            span {{yearUsage | number:0}} kWh
           p Målerverdi
-            span {{meterValue}} Wh
+            span {{meterValue | number:3 }} kWh
+          p Neste måned
+            span {{nextMonth | number:0}} kr
 
     #content
       ul.tabs
