@@ -93,7 +93,7 @@ exports.addYearlyGraph = function(json, pie) {
         .showValues(true)
         .transitionDuration(250)
         .options({
-          margin: {left: 100, bottom: 50}
+          margin: {left: 100, bottom: 130}
         });
 
       yearlyChart.xAxis

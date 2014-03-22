@@ -53,7 +53,7 @@ html(ng-app="powerhack")
         #sub-category-nav
           .grid
             //a(href='' ng-repeat='sub in currentCategory.subcategories', ng-click='chooseSub(sub)') {{sub.element}}
-            a(href='' ng-repeat='sub in currentCategory.subcategories', ng-click='chooseSub(sub)' ng-class='{active: (currentSub == sub)}')
+            a(href='' ng-repeat='sub in currentCategory.subcategories', ng-click='chooseSub(sub)' ng-class='{active: (currentSub == sub), checked: switches[sub][1] == true}')
               img.icon(src='/images/{{sub.icon}}', alt='{{sub.element}}')
 
         #footer-content
