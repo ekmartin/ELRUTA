@@ -86,7 +86,7 @@
     {
       "element": "Lyspærer",
       "template": "lysparer",
-      "description": "Du har kanskje hørt at du kan spare en del på å bytte lyspærer, men har kanskje ikke noen god formening om hvor mye? Bruk slideren under og se sparepotensialet!",
+      "description": "Du har kanskje hørt at du kan spare en del på å bytte lyspærer, men har kanskje ikke noen god formening om hvor mye?",
       "icon": "lightbulb.png",
       "baselevel": 16,
       "powerconsumption": ["~60W", "~5W"],
