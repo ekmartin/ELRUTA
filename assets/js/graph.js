@@ -5,9 +5,13 @@ var realtimeChart;
 
 var changeGraph = 2;
 
-exports.addRealtimeGraph = function(json) {
+var clearGraph = function() {
   $('#graph').empty();
   chart = null;
+  realtimeChart = null;
+}
+exports.addRealtimeGraph = function(json) {
+  clearGraph();
   nv.addGraph(function() {
       realtimeChart = nv.models.lineChart()
         .options({
@@ -43,17 +47,16 @@ exports.addRealtimeGraph = function(json) {
 };
 
 exports.addLineGraph = function(json) {
-  $('#graph').empty();
-  realtimeChart = null;
+  clearGraph();
   data = [
     {
-      key: 'History',
-      color: '#312e3f',
+      key: 'Historikk',
+      color: '#e9e9e7',
       values: []
     },
     {
-      key: 'Predicted',
-      color: '#00ff00',
+      key: 'Estimert',
+      color: '#312e3f',
       values: []
     }
   ];
@@ -119,8 +122,8 @@ nv.addGraph(function() {
 exports.updateLiveData = function(json) {
   realtimeData = [
     {
-      key: 'Realtime',
-      color: '#00ff00',
+      key: 'Sanntid',
+      color: '#a8bf46',
       values: []
     }
   ];
@@ -151,8 +154,8 @@ exports.updateData = function(change) {
       console.log("lager");
       data.push(
         {
-          key: 'Changed',
-          color: '#0000ff',
+          key: 'Forbedret Estimat',
+          color: '#a8bf46',
           values: []
         }
       );
