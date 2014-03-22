@@ -66,6 +66,20 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
 
   $scope.switches = {
     shower: [0.02, false],
+    washer: [0.01, false],
+    wash: [0.01, false],
+    dishwasher: [0.01, false],
+    light: [0.03, false],
+    dim: [0.01, false],
+    brain: [0.01, false],
+    lightsensor: [0.015, false],
+    electronics: [0.015, false],
+    freezer: [0.01, false],
+    cooler: [0.01, false],
+    heat: [0.175, false],
+    insulation: [0.175, false],
+    curtains: [0.025, false]
+
   };
 
   $scope.$watch('switches', function() {
