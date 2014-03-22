@@ -51,7 +51,7 @@ html(ng-app="powerhack")
       #category-nav
         a(href='' ng-repeat='category in categories', ng-click='chooseCategory(category)', ng-class='{active: (currentCategory == category)}')
           img(src='/images/{{category.name}}.png')
-          | {{category.name}}
+          | {{titles[category.name]}}
 
       #subfooter
         #sub-category-nav
