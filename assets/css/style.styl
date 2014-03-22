@@ -82,12 +82,22 @@ header
 #sidebar
   position absolute
   top 100px
-  width 15%
+  width 20%
   absolute left
   background $lightest
   padding 20px
   margin-left 10px
   bottom 220px
+
+  input
+    padding 6px 10px
+    font-size 16px
+    border 0
+    border-bottom 3px solid #ddd
+    width 100px
+
+    &:focus
+      outline none
 
   .grid a
     display inline-block
@@ -111,7 +121,7 @@ header
 #content
   position absolute
   top 100px
-  left 15%
+  left 20%
   margin-left 20px
   bottom 220px
   right 10px
@@ -130,7 +140,7 @@ footer
 #category-nav
   background #cececc
   position absolute
-  width 15%
+  width 20%
   height 200px
   left 10px
   margin-right 10px
@@ -152,7 +162,7 @@ footer
   position absolute
   height 200px
   absolute left bottom right
-  left 15%
+  left 20%
   margin-left 20px
 
 #sub-category-nav
@@ -164,7 +174,7 @@ footer
   .grid a
     display inline-block
     height 100px
-    width 25%
+    width 50%
     line-height 100px
     text-align center
     color #222
@@ -214,13 +224,15 @@ footer
     background-color: rgb(168, 191, 57)
 
 .consumption
-  text-align center
+  text-align left
   margin-top 10px
   color #666
+  padding 10px
 
-  span
+  span, input
     color #333
     margin-left 6px
+    float right
 
 .form
   margin-top 20px
