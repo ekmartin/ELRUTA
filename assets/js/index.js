@@ -41,6 +41,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', f
   $scope.categories = res;
   $scope.currentCategory = localStorageService.get('currentCategory');
   $scope.currentSub = null;
+  $scope.sliderValue = 0;
 
   $scope.meterValue = 6500120;
 

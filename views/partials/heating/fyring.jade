@@ -2,6 +2,10 @@ h2 Fyring
 
 p {{currentSub.description}}
 
-div.form
-  label Varmepumpe
-  input(type='range', name='varmepumpe')
+div.form.toggle
+  label(class='switch-light switch-candy togglelabel')
+    input(type='checkbox')
+    span(style='color:black;') Modus
+      span(class='toggle') På
+      span(class='toggle') Av
+    a(href='#' class='toggleslider')
