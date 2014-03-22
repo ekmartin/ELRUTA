@@ -158,9 +158,10 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
         totalKiloWatt += value.value;
       }
     };
+
+    $scope.nextMonth = $scope.calculateEarned(totalKiloWatt, 1);
   };
 
-  $scope.nextMonth = $scope.calculateEarned(totalKiloWatt, 1);
   $scope.estimatedNextMonth = function() {
     return $scope.nextMonth * $scope.factor;
   };
