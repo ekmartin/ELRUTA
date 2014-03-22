@@ -172,6 +172,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     });
   };
 
+  $scope.currentView = 'Sparing';
   $scope.graphTypes = ['Sparing', 'Live', 'Årsforbruk'];
   $scope.loadLiveDataFunction = function(){
     $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.realtime.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.realtime.date() + '&dateTo=' + $rootScope.realtime.date() + '&intervalType=' + $rootScope.realtime.intervalType})
@@ -237,6 +238,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   }
 
   $scope.changeGraphMode = function(mode) {
+    $scope.currentView = mode;
     if (mode === 'Sparing'){
       $scope.stopLiveData();
       $scope.loadDataFunction();
@@ -253,5 +255,23 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
 
   // Load graphs
   $scope.loadDataFunction();
+
+  // Display Modes
+  $scope.displayMode = function() {
+    if ($scope.currentView != 'Sparing') {
+      return "large-page";
+    }
+    else {
+      return "";
+    }
+  };
+  $scope.displayModeFooter = function() {
+    if ($scope.currentView != 'Sparing') {
+      return "hide";
+    }
+    else {
+      return "";
+    }
+  };
 
 }]);
