@@ -110,5 +110,12 @@
       "description": "Skrur du ikke det elektroniske utstyret ditt helt av etter du har brukt det? Det kan være dumt for strømregninga!",
       "icon": "computer.png",
     },
+
+    {
+      "element": "Støvsuger",
+      "template": "stovsuger",
+      "description": "Støvsugeren din kan være av eldre sort, EU har bestemt at strømforbruket til støvsugerene skal ned til 900W i løpet av 2017.",
+      "icon": "vacuum.png",
+    }
   ]
 }
