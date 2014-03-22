@@ -4,40 +4,28 @@
       "element": "Dusj",
       "template": "dusj",
       "description": "Dusjer du lenge? Har du sparedusjhode? Det kan være påvirke stort på vannforbruket!",
-      "icon": "shower.png",
-      "baselevel": 10,
-      "averagewaterusage": ["20liter", "6liter"],
-      "sliderconstant": [0.7, 0.25]
+      "icon": "shower.png"
     },
 
     {
       "element": "Vaskemaskin",
       "template": "vaskemaskin",
       "description": "Man kan enkelt spare penger ved riktig bruk av vaskemaskinen. Bruk eco-program og fyll opp vaskemaskinen! (Det vasker like bra!)",
-      "icon": "washmachine.png",
-      "baselevel": 2,
-      "averagewaterusage": 20,
-      "sliderconstant": 2.5
+      "icon": "washmachine.png"
     },
 
     {
       "element": "Vask",
       "template": "vask",
       "description": "Tar du oppvasken mens vannet renner? Dersom du lukker sluket kan det spare deg for flere liter varmtvann!",
-      "icon": "wash.png",
-      "baselevel": 10,
-      "averagewateruseage": 5,
-      "sliderconstant": 0.3
+      "icon": "wash.png"
     },
 
     {
       "element": "Oppvaskmaskin",
       "template": "oppvaskmaskin",
       "description": "På lik linje med vaskemaskinen kan du fort spare strøm ved å bruke eco-program og fylle opp maskinen!",
-      "icon": "dishwasher.png",
-      "baselevel": 30,
-      "averagewateruseage": 20,
-      "sliderconstant": 2.5
+      "icon": "dishwasher.png"
     }
   ],
 
@@ -46,10 +34,7 @@
       "element": "Fyring",
       "template": "fyring",
       "description": "Det er mye snakk om effektiviteten til varmepumpene, bruk slideren nedenfor for å se forbruk før og etter installasjon!",
-      "icon": "heating.png",
-      "baselevel": 0.6,
-      "averagepowerconsumption": "60% av total kwh",
-      "sliderconstant": 0.1
+      "icon": "heating.png"
     },
 
     {
@@ -57,8 +42,6 @@
       "template": "gardiner",
       "description": "Effektiv bruk av gardiner forhindrer noe av varmetapet som vinduer står for!",
       "icon": "curtains.png",
-      "averagepowerconsumption": "0",
-      "sliderconstant": 10
     },
 
     {
@@ -66,9 +49,13 @@
       "template": "isolasjon",
       "description": "Dersom du etter-isolerer huset ditt vil det føre til sparte kostnader i oppvarming over tid, samt øke verdien på boligen ved bedre energiklasse!",
       "icon": "insulation.png",
-      "energyclass": "D",
-      "averagepowerconsumption": 0,
-      "sliderconstant": 0.1
+    },
+
+    {
+      "element": "Temperatur",
+      "template": "temperatur",
+      "description": "Det kan være smart å ikke fyre i rom som ikke aktivt blir brukt, er du i tillegg konsekvent på å ha lukkede dører så kan det det hjelpe til på strømregningen!",
+      "icon": "temperature.png"
     }
   ],
 
@@ -77,40 +64,28 @@
       "element": "Lyspærer",
       "template": "lysparer",
       "description": "Du har kanskje hørt at du kan spare en del på å bytte lyspærer, men har kanskje ikke noen god formening om hvor mye?",
-      "icon": "lightbulb.png",
-      "baselevel": 16,
-      "powerconsumption": ["~60W", "~5W"],
-      "sliderconstant": [1.8, 0.15]
+      "icon": "lightbulb.png"
     },
 
     {
       "element": "Dimmer",
       "template": "dimmer",
       "description": "Dersom pærene dine støtter det, og du kunne tenke deg å installere lysdimmere så kan det også føre til mindre strømregning!",
-      "icon": "dimmer.png",
-      "baselevel": 16,
-      "powerconsumption": "0",
-      "sliderconstant": 0.7
+      "icon": "dimmer.png"
     },
 
     {
       "element": "Hjerne",
       "template": "hjerne",
       "description": "Er du faktisk konsekvent på å skru av lysene i rom du ikke bruker? Det fører også til sparte kostnader!",
-      "icon": "brain.png",
-      "baselevel": 16,
-      "powerconsumption": "~30W",
-      "sliderconstant": 0.85
+      "icon": "brain.png"
     },
 
     {
       "element": "Lyssensor",
       "template": "lyssensor",
       "description": "Har du utebelysning? Da kan det lønne seg å installere en lyssensor som registrer om det er mørkt!",
-      "icon": "moon.png",
-      "baselevel": 16,
-      "powerconsumption": "~5W",
-      "sliderconstant": 0.95
+      "icon": "moon.png"
     }
   ],
 
@@ -119,10 +94,7 @@
       "element": "Kjøleskap",
       "template": "kjoleskap",
       "description": "Har du et gammelt kjøleskap? Eldre kjøleskap bruker opp mot dobbelt så mye strøm som nyere modeller.",
-      "icon": "refrigerator.png",
-      "energyclass": "D",
-      "powerconsumption": 1.1,
-      "sliderconstant": 0.1
+      "icon": "refrigerator.png"
     },
 
     {
@@ -130,9 +102,6 @@
       "template": "fryser",
       "description": "På lik linje som kjøleskapet er eldre frysere mindre energieffektive enn nyere.",
       "icon": "freezer.png",
-      "energyclass": "D",
-      "powerconsumtion": 1.1,
-      "sliderconstant": 0.1
     },
 
     {
@@ -140,9 +109,6 @@
       "template": "elektronikk",
       "description": "Skrur du ikke det elektroniske utstyret ditt helt av etter du har brukt det? Det kan være dumt for strømregninga!",
       "icon": "computer.png",
-      "energyclass": "",
-      "powerconsumtion": 0.3,
-      "sliderconstant": 0.1
     },
   ]
 }

@@ -77,7 +77,8 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     cooler: [0.01, false],
     heat: [0.175, false],
     insulation: [0.175, false],
-    curtains: [0.025, false]
+    curtains: [0.025, false],
+    temp: [0.01, false]
 
   };
 
