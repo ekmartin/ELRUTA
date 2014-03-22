@@ -67,10 +67,26 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     rooms: 4
   };
 
-  $scope.changeFactor = 1.0;
+  $scope.powerSavings = {
+    shower: 0.02,
+  };
 
-  $scope.$watch('changeFactor', function() {
-    graph.updateData(Math.max(0.1, $scope.changeFactor));
+  $scope.switches = {
+    shower: false,
+  };
+
+  $scope.toggleSwitch = function(switchName) {
+    $scope.switches[switchName] = !$scope.switches[switchName];
+  };
+
+  $scope.$watch('switches', function() {
+    var factor = 1 - Object.keys($scope.powerSavings).reduce(function(accumulated, key) {
+      return $scope.switches[key]
+        ? accumulated + $scope.powerSavings[key]
+        : accumulated;
+    });
+
+    graph.updateData(factor);
   });
 
   var meterValueTimer = function() {
