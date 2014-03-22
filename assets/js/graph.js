@@ -145,28 +145,30 @@ exports.updateLiveData = function(json) {
 };
 
 exports.updateData = function(change) {
-  console.log("her", change);
-  if (!data[2]) {
-    console.log("lager");
-    data.push(
-      {
-        key: 'Changed',
-        color: '#0000ff',
-        values: []
+  if (chart) {
+    console.log("her", change);
+    if (!data[2]) {
+      console.log("lager");
+      data.push(
+        {
+          key: 'Changed',
+          color: '#0000ff',
+          values: []
+        }
+      );
+      for (var i = 0; i < data[1].values.length; i++) {
+        data[2].values.push({
+          x: data[1].values[i].x,
+          y: data[1].values[i].y
+        });
       }
-    );
-    for (var i = 0; i < data[1].values.length; i++) {
-      data[2].values.push({
-        x: data[1].values[i].x,
-        y: data[1].values[i].y
-      });
     }
-  }
 
-  for (var j in data[2].values) {
-    data[2].values[j].y = data[1].values[j].y*change;
-  }
+    for (var j in data[2].values) {
+      data[2].values[j].y = data[1].values[j].y*change;
+    }
 
-  console.log(data);
-  chart.update();
+    console.log(data);
+    chart.update();
+  } 
 };
