@@ -82,22 +82,20 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   };
 
   $scope.factor = 0;
+  $scope.wantedPrice = 0;
 
-  $scope.proposeSavings = function(wanted) {
+  $scope.proposeSavings = function() {
     proposed = [];
     for (key in $scope.switches) {
       $scope.switches[key][1] = true;
-      factorUpdate();
+      updateFactor();
       proposed.push(key);
-      console.log("her", $scope.estimatedNextMonth(), key, $scope.switches[key]);
-      if ($scope.estimatedNextMonth() <= wanted) {
-        break;
-      }
+      if ($scope.estimatedNextMonth() <= $scope.wantedPrice) break;
     }
     return proposed;
   }
 
-  function factorUpdate() {
+  function updateFactor() {
     $scope.factor = 1 - Object.keys($scope.switches).reduce(function(accumulated, key) {
       return !!$scope.switches[key][1]
         ? accumulated + $scope.switches[key][0]
@@ -108,7 +106,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     $scope.estimatedNextMonth();
   }
 
-  $scope.$watch('switches', factorUpdate, true);
+  $scope.$watch('switches', updateFactor, true);
 
   var meterValueTimer = function() {
     $scope.meterValue += 0.001;

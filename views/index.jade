@@ -38,6 +38,8 @@ html(ng-app="powerhack")
             span {{nextMonth | number:0}} kr
           p Forbedret månedsforbruk
             span {{estimatedNextMonth() | number:0}} kr
+          p Ønsket forbruk
+            input(ng-model='wantedPrice', type='number', ng-blur='proposeSavings()')
 
     #content
       ul.tabs
