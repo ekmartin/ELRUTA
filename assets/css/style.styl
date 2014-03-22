@@ -206,9 +206,10 @@ footer
 
       img
         -webkit-filter brightness(20%)
-        &.checked
-          -webkit-filter brightness(60%)
-    
+
+    &.checked
+      img
+        -webkit-filter brightness(50%)
 
 #footer-content
   position absolute
@@ -246,8 +247,12 @@ footer
     margin-left 6px
     float right
 
-.form
-  margin-top 20px
+.desc
+  position absolute
+
+.form.toggle
+  position absolute
+  top 110px
 
 .settings
   position relative

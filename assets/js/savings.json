@@ -33,7 +33,7 @@
     {
       "element": "Fyring",
       "template": "fyring",
-      "description": "Det er mye snakk om effektiviteten til varmepumpene, bruk slideren nedenfor for å se forbruk før og etter installasjon!",
+      "description": "Det er mye snakk om effektiviteten til varmepumpene, trykk nedenfor for å se energiforbruk før og etter installasjon!",
       "icon": "heating.png"
     },
 
@@ -63,7 +63,7 @@
     {
       "element": "Lyspærer",
       "template": "lysparer",
-      "description": "Du har kanskje hørt at du kan spare en del på å bytte lyspærer, men har kanskje ikke noen god formening om hvor mye?",
+      "description": "Du har kanskje hørt at du kan spare en del på å bytte lyspærer, her kan vi vise deg hvor mye!",
       "icon": "lightbulb.png"
     },
 

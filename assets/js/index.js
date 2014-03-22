@@ -83,6 +83,13 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     stovsuger: [0.002, false]
   };
 
+  $scope.titles = {
+    electronics: 'Elektronikk',
+    heating: 'Oppvarming',
+    light: 'Lys',
+    water: 'Vann'
+  }
+
   $scope.factor = 0;
   $scope.wantedPrice = 0;
 
