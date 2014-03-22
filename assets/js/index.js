@@ -23,6 +23,7 @@ app.run(function($rootScope, $http) {
     intervalType: "Minute"
   };
 
+  $rootScope.paceCss = '/css/pace.default.css';
 
 });
 
@@ -239,6 +240,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
       $scope.loadDataFunction();
     }
     else if (mode === 'Live'){
+      $rootScope.paceCss = '/css/pace.simple.css';
       $scope.loadLiveData();
     }
     else if (mode === 'Årsforbruk') {
