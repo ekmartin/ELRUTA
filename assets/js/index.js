@@ -94,7 +94,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   $scope.loadLiveDataFunction = function(){
     $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.realtime.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.realtime.date() + '&dateTo=' + $rootScope.realtime.date() + '&intervalType=' + $rootScope.realtime.intervalType})
       .success(function(data, status, headers, config) {
-        console.log(data);
+        graph.updateLiveData(data);
       })
       .error(function(data, status, headers, config) {
       });
@@ -115,7 +115,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     if ( angular.isDefined(stop) ) return;
 
     $scope.loadLiveDataFunction();
-    stop = $interval(function() {$scope.loadLiveDataFunction();}, 1000*3);
+    stop = $interval(function() {$scope.loadLiveDataFunction();}, 1000*60);
 
   };
   $scope.stopLiveData = function() {
@@ -138,8 +138,6 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
 
 
   // Load graphs
-  $scope.loadLiveDataFunction();
   $scope.loadDataFunction();
 
 }]);
-

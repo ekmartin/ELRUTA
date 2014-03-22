@@ -6,51 +6,45 @@ var realtimeChart;
 var changeGraph = 2;
 
 exports.addRealtimeGraph = function(json) {
-  chart.remove();
-
-  realtimeData = [
-    {
-      key: 'Realtime',
-      color: '#00ff00',
-      values: []
-    }
-  ];
-
-  for (var i = json.length - 20; i < json.length; i++) {
-    var timeStamp = moment(json[i].timeStamp);
-    realtimeData[0].values.push({
-      x: timeStamp.unix(),
-      y: json[i].value
-    });
-  }
-
+  $('#graph').empty();
+  chart = null;
   nv.addGraph(function() {
-    realtimeChart = nv.models.lineWithFocusChart()
-      .options({
-        showXAxis: true,
-        showYAxis: true,
-        transitionDuration: 250,
-        margin: {left: 100, bottom: 50}
+      realtimeChart = nv.models.lineChart()
+        .options({
+          showXAxis: true,
+          showYAxis: true,
+          transitionDuration: 250,
+          margin: {left: 100, bottom: 50}
+        });
+
+      //chart.useInteractiveGuideline(true);
+      realtimeChart.xAxis
+        .axisLabel('Klokkeslett')
+        .tickFormat(function(d) {
+            return d3.time.format('%H:%M')(new Date(d*1000));
+        });
+      realtimeChart.yAxis
+        .axisLabel('Strømforbruk (kW/h)')
+        .tickFormat(d3.format(',2f'));
+
+      d3.select('#graph')
+          .datum(realtimeData)
+          .call(realtimeChart);
+
+      nv.utils.windowResize(function() {
+        if (realtimeChart != null) {
+          console.log("rtchart rez");
+          realtimeChart.update();
+        } 
       });
 
-    //chart.useInteractiveGuideline(true);
-    chart.xAxis
-      .axisLabel('Klokkeslett')
-      .tickFormat(function(d) {
-          return d3.time.format('%H:%M')(new Date(d*1000));
-      });
-    chart.yAxis
-      .axisLabel('Strømforbruk (kW/h)')
-      .tickFormat(d3.format('d'));
+      return realtimeChart;
     });
-
-    d3.select('#graph')
-        .datum(realtimeData)
-        .call(realtimeChart);
 };
 
 exports.addLineGraph = function(json) {
-  //realtimeChart.remove();
+  $('#graph').empty();
+  realtimeChart = null;
   data = [
     {
       key: 'History',
@@ -111,10 +105,43 @@ nv.addGraph(function() {
         .datum(data)
         .call(chart);
 
-    nv.utils.windowResize(chart.update);
+    nv.utils.windowResize(function() {
+      if (chart != null) {
+        console.log("chart rez");
+        chart.update();
+      }
+    });
 
     return chart;
   });
+};
+
+exports.updateLiveData = function(json) {
+  realtimeData = [
+    {
+      key: 'Realtime',
+      color: '#00ff00',
+      values: []
+    }
+  ];
+
+  for (var i = json.length - 20; i < json.length; i++) {
+    var timeStamp = moment(json[i].timeStamp);
+    realtimeData[0].values.push({
+      x: timeStamp.unix(),
+      y: json[i].value*1000
+    });
+  }
+  console.log("new data:", realtimeData);
+  if (!realtimeChart) {
+    exports.addRealtimeGraph(realtimeData);
+  }
+  else {
+    exports.addRealtimeGraph(realtimeData);
+    console.log("updaing realtimeChart");
+    realtimeData[0].values.shift();
+    realtimeChart.update();
+  }
 };
 
 exports.updateData = function(change) {
