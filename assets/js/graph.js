@@ -155,7 +155,7 @@ exports.addLineGraph = function(json) {
   data = [
     {
       key: 'Historikk',
-      color: '#e9e9e7',
+      color: '#adad9c',
       values: []
     },
     {
