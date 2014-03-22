@@ -52,7 +52,9 @@ html(ng-app="powerhack")
 
     footer
       #category-nav
-        a(href='' ng-repeat='category in categories', ng-click='chooseCategory(category)', ng-class='{active: (currentCategory == category)}') {{category.name}}
+        a(href='' ng-repeat='category in categories', ng-click='chooseCategory(category)', ng-class='{active: (currentCategory == category)}')
+          img(src='/images/{{category.name}}.png')
+          | {{category.name}}
 
       #subfooter
         #sub-category-nav
