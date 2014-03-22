@@ -55,7 +55,7 @@
       "element": "Temperatur",
       "template": "temperatur",
       "description": "Det kan være smart å ikke fyre i rom som ikke aktivt blir brukt, er du i tillegg konsekvent på å ha lukkede dører så kan det det hjelpe til på strømregningen!",
-      "icon": "temperature"
+      "icon": "temperature.png"
     }
   ],
 
