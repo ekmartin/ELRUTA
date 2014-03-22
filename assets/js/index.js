@@ -49,6 +49,12 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     rooms: 4
   };
 
+  $scope.changeFactor = 1.0;
+
+  $scope.$watch('changeFactor', function() {
+    graph.updateData($scope.changeFactor);
+  });
+
   var meterValueTimer = function() {
     $scope.meterValue += 1;
     $timeout(meterValueTimer, 3000);
@@ -142,4 +148,3 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   $scope.loadDataFunction();
 
 }]);
-
