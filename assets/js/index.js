@@ -81,14 +81,16 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
 
   };
 
+  $scope.factor = 0;
+
   $scope.$watch('switches', function() {
-    var factor = 1 - Object.keys($scope.switches).reduce(function(accumulated, key) {
+    $scope.factor = 1 - Object.keys($scope.switches).reduce(function(accumulated, key) {
       return !!$scope.switches[key][1]
         ? accumulated + $scope.switches[key][0]
         : accumulated;
     }, 0);
 
-    graph.updateData(factor);
+    graph.updateData($scope.factor);
   }, true);
 
   var meterValueTimer = function() {
