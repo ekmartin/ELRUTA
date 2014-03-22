@@ -109,15 +109,6 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     return (($scope.kwhPrice/100) * kwh * days);
   };
 
-  $scope.calculatePrice = function(data) { // Tar data fra apiet inn og returnerer pris
-    var total = 0;
-    for (var i = 0; i<data.length; i++) {
-      total += (($scope.kwhPrice/100) * data[i].value);
-    }
-    return total;
-  };
-
-
   // Kalkuler pris neste måned
   $scope.calculateNextMonth = function(data){
     var totalKiloWatt = 0;
