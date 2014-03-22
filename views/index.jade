@@ -24,7 +24,7 @@ html(ng-app="powerhack")
           input(type='number', ng-model='household.persons', min='0')
           input(type='number', ng-model='household.rooms', min='0')
 
-    #sidebar
+    #sidebar(ng-class='displayMode()')
       .grid
         a(href='#', ng-repeat='graphType in graphTypes', ng-click='changeGraphMode(graphType)') {{graphType}}
 
@@ -35,19 +35,23 @@ html(ng-app="powerhack")
             span {{yearUsage | number:0}} kWh
           p Målerverdi
             span {{meterValue | number:3 }} kWh
-          p Estimert månedsforbruk
-            span {{nextMonth | number:0}} kr
-          p Forbedret månedsforbruk
-            span {{estimatedNextMonth() | number:0}} kr
-          p Ønsket forbruk
-            input(ng-model='wantedPrice', type='number', ng-blur='proposeSavings()')
 
-    #content
+          div(ng-class='displayModeFooter()')
+            p Estimert månedsforbruk
+              span {{nextMonth | number:0}} kr
+            p Forbedret månedsforbruk
+              span {{estimatedNextMonth() | number:0}} kr
+            p Ønsket forbruk
+              input(ng-model='wantedPrice', type='number', ng-blur='proposeSavings()')
+
+    #content(ng-class="displayMode()")
       svg#graph
 
-    footer
+    footer(ng-class="displayModeFooter()")
       #category-nav
-        a(href='' ng-repeat='category in categories', ng-click='chooseCategory(category)', ng-class='{active: (currentCategory == category)}') {{category.name}}
+        a(href='' ng-repeat='category in categories', ng-click='chooseCategory(category)', ng-class='{active: (currentCategory == category)}')
+          img(src='/images/{{category.name}}.png')
+          | {{category.name}}
 
       #subfooter
         #sub-category-nav

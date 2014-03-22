@@ -65,22 +65,22 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   };
 
   $scope.switches = {
-    shower: [0.02, false],
-    washer: [0.01, false],
-    wash: [0.01, false],
-    dishwasher: [0.01, false],
-    light: [0.03, false],
-    dim: [0.01, false],
-    brain: [0.01, false],
-    lightsensor: [0.015, false],
-    electronics: [0.015, false],
-    freezer: [0.01, false],
-    cooler: [0.01, false],
-    heat: [0.175, false],
-    insulation: [0.175, false],
-    curtains: [0.025, false],
-    temp: [0.01, false],
-    vacuum: [0.002, false]
+    dusj: [0.02, false],
+    vaskemaskin: [0.01, false],
+    vask: [0.01, false],
+    oppvaskmaskin: [0.01, false],
+    lysparer: [0.03, false],
+    dimmer: [0.01, false],
+    hjerne: [0.01, false],
+    lyssensor: [0.015, false],
+    elektronikk: [0.015, false],
+    fryser: [0.01, false],
+    kjoleskap: [0.01, false],
+    fyring: [0.175, false],
+    isolasjon: [0.175, false],
+    gardiner: [0.025, false],
+    temperatur: [0.01, false],
+    stovsuger: [0.002, false]
   };
 
   $scope.factor = 0;
@@ -158,10 +158,12 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
         totalKiloWatt += value.value;
       }
     };
+
     $scope.nextMonth = $scope.calculateEarned(totalKiloWatt, 1);
-    $scope.estimatedNextMonth = function() {
-      return $scope.nextMonth * $scope.factor;
-    };
+  };
+
+  $scope.estimatedNextMonth = function() {
+    return $scope.nextMonth * $scope.factor;
   };
 
 
@@ -171,6 +173,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     });
   };
 
+  $scope.currentView = 'Sparing';
   $scope.graphTypes = ['Sparing', 'Live', 'Årsforbruk'];
   $scope.loadLiveDataFunction = function(){
     $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.realtime.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.realtime.date() + '&dateTo=' + $rootScope.realtime.date() + '&intervalType=' + $rootScope.realtime.intervalType})
@@ -236,6 +239,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   }
 
   $scope.changeGraphMode = function(mode) {
+    $scope.currentView = mode;
     if (mode === 'Sparing'){
       $scope.stopLiveData();
       $scope.loadDataFunction();
@@ -252,5 +256,23 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
 
   // Load graphs
   $scope.loadDataFunction();
+
+  // Display Modes
+  $scope.displayMode = function() {
+    if ($scope.currentView != 'Sparing') {
+      return "large-page";
+    }
+    else {
+      return "";
+    }
+  };
+  $scope.displayModeFooter = function() {
+    if ($scope.currentView != 'Sparing') {
+      return "hide";
+    }
+    else {
+      return "";
+    }
+  };
 
 }]);
