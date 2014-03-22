@@ -145,7 +145,9 @@ exports.updateLiveData = function(json) {
 };
 
 exports.updateData = function(change) {
+  console.log("her", change);
   if (!data[2]) {
+    console.log("lager");
     data.push(
       {
         key: 'Changed',
@@ -161,8 +163,8 @@ exports.updateData = function(change) {
     }
   }
 
-  for (var j in data[changeGraph].values) {
-    data[changeGraph].values[j].y = data[changeGraph-1].values[j]*change;
+  for (var j in data[2].values) {
+    data[2].values[j].y = data[1].values[j].y*change;
   }
 
   console.log(data);
