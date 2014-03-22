@@ -67,11 +67,23 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     rooms: 4
   };
 
-  $scope.changeFactor = 1.0;
+  $scope.powerSavings = {
+    shower: 0.02,
+  };
 
-  $scope.$watch('changeFactor', function() {
-    graph.updateData(Math.max(0.1, $scope.changeFactor));
-  });
+  $scope.switches = {
+    shower: 0,
+  };
+  
+  $scope.$watch('switches', function() {
+    var factor = 1 - Object.keys($scope.powerSavings).reduce(function(accumulated, key) {
+      return !!$scope.switches[key]
+        ? accumulated + $scope.powerSavings[key]
+        : accumulated;
+    }, 0);
+
+    graph.updateData(factor);
+  }, true);
 
   var meterValueTimer = function() {
     $scope.meterValue += 1;
@@ -96,28 +108,21 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
 
   $scope.getCurrentSettingsTemplate = function() {
     if ($scope.currentSub)
-      return "partials/" + $scope.currentCategory.id + "." + $scope.currentSub.template;
-    return "partials/welcome";
+      return 'partials/' + $scope.currentCategory.id + '.' + $scope.currentSub.template;
+    return 'partials/welcome';
   };
 
-
-  /* Kalkulerer priser */
-  $scope.kwhPrice = 40.5; // Øre pr kwh
+  $scope.kwhPrice = 40.5;
   $scope.calculateEarned = function(kwh, days) { // kwh: kwh du sparer, days: hvor lenge du skal spare, returnerer sparte kroner
     return (($scope.kwhPrice/100) * kwh * days);
-  }
-  $scope.calculatePrice = function(data) { // Tar data fra apiet inn og returnerer pris
-    var total = 0;
-    for (var i = 0; i<data.length; i++) {
-      total += (($scope.kwhPrice/100) * data[i].value);
-    }
-    return total;
-  }
+  };
 
+  $scope.calculatePrice = function(data) {
+    return data.reduce(function(total, value) {
+      return total + ($scope.kwhPrice/100 * value);
+    });
+  };
 
-
-
-  /* Change Graph */
   $scope.graphTypes = ['Sparing', 'Live'];
   $scope.loadLiveDataFunction = function(){
     $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.realtime.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.realtime.date() + '&dateTo=' + $rootScope.realtime.date() + '&intervalType=' + $rootScope.realtime.intervalType})
@@ -125,8 +130,10 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
         graph.updateLiveData(data);
       })
       .error(function(data, status, headers, config) {
+        console.log(arguments);
       });
   };
+
   $scope.loadDataFunction = function() {
     $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType})
       .success(function(data, status, headers, config) {
@@ -134,7 +141,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
         graph.addLineGraph(data);
       })
       .error(function(data, status, headers, config) {
-        console.log("feil");
+        console.log(arguments);
       });
   };
 
@@ -146,13 +153,13 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     stop = $interval(function() {$scope.loadLiveDataFunction();}, 1000*60);
 
   };
+
   $scope.stopLiveData = function() {
     if (angular.isDefined(stop)) {
       $interval.cancel(stop);
       stop = undefined;
     }
   };
-
 
   $scope.changeGraphMode = function(mode) {
     if (mode === 'Sparing'){
@@ -163,7 +170,6 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
       $scope.loadLiveData();
     }
   };
-
 
   // Load graphs
   $scope.loadDataFunction();
