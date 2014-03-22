@@ -83,6 +83,16 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
 
   $scope.factor = 0;
 
+  function proposeSavings(wanted) {
+    proposed = [];
+    for (key in $scope.switches) {
+      $scope.switches[key][1] = true;
+      proposed.push(key);
+      if ($scope.estimatedNextMonth() <= wanted) break;
+    }
+    return proposed;
+  }
+
   $scope.$watch('switches', function() {
     $scope.factor = 1 - Object.keys($scope.switches).reduce(function(accumulated, key) {
       return !!$scope.switches[key][1]
