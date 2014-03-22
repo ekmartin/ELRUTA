@@ -81,14 +81,17 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
 
   };
 
+  $scope.factor = 0;
+
   $scope.$watch('switches', function() {
-    var factor = 1 - Object.keys($scope.switches).reduce(function(accumulated, key) {
+    $scope.factor = 1 - Object.keys($scope.switches).reduce(function(accumulated, key) {
       return !!$scope.switches[key][1]
         ? accumulated + $scope.switches[key][0]
         : accumulated;
     }, 0);
 
-    graph.updateData(factor);
+    graph.updateData($scope.factor);
+    $scope.estimatedNextMonth();
   }, true);
 
   var meterValueTimer = function() {
@@ -138,8 +141,11 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
       if (value.timeStamp.indexOf(((today.getYear() + 1900)-1) + prefix + month) != -1) {
         totalKiloWatt += value.value;
       }
-    }
+    };
     $scope.nextMonth = $scope.calculateEarned(totalKiloWatt, 1);
+    $scope.estimatedNextMonth = function() {
+      return $scope.nextMonth * $scope.factor;
+    };
   };
 
 
