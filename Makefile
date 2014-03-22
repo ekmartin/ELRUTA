@@ -10,9 +10,6 @@ server:
 
 rip: $(RIPPED)
 
-%.png: %.orig.png
-	convert $< -alpha extract -fuzz 15% -transparent black -threshold 0 $@
-
 test:
 	node_modules/.bin/mocha --colors --reporter list
 
