@@ -1,11 +1,11 @@
-h2 Badekar
+h2 Stekeovn
 
 p {{currentSub.description}}
 
 div.form.toggle
   label(class='switch-light switch-candy togglelabel')
-    input(type='checkbox')
+    input(type='checkbox' ng-model='switches.curtains[1]')
     span(style='color:black;') Modus
-      span(class='toggle') Bruker
-      span(class='toggle') Bruker ikke
+      span(class='toggle') Inaktiv
+      span(class='toggle') Aktiv
     a(href='#' class='toggleslider')
