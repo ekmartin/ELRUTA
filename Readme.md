@@ -3,7 +3,7 @@
 MIT Dropouts' bidrag til Demo Steinkjers Hackathon, PowerHack 2014.
 
 ```bash
-Kjøres med: 
+Kjøres med (obs, krever npm og node.js!): 
 $ make install
 $ make server
 ```
