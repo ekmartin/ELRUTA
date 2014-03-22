@@ -28,7 +28,7 @@ app.run(function($rootScope) {
 var categories = require('./savings.json')
 
 
-app.controller('MainController', ['$scope', '$timeout', 'localStorageService', function($scope, $timeout, localStorageService) {
+app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '$rootScope', '$http', '$interval', function($scope, $timeout, localStorageService, $rootScope, $http, $interval) {
   var res = {};
   for (var key in categories) {
     res[key] = {
@@ -81,10 +81,39 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', f
     return total;
   }
 
-}]);
 
-app.controller('GraphController', ['$scope', '$http', '$rootScope',
-  function($scope, $http, $rootScope) {
+
+
+  /* Change Graph */
+  $scope.graphTypes = ['Sparing', 'Live'];
+  $scope.loadLiveDataFunction = function(){
+    $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.realtime.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.realtime.date() + '&dateTo=' + $rootScope.realtime.date() + '&intervalType=' + $rootScope.realtime.intervalType})
+      .success(function(data, status, headers, config) {
+        console.log(data);
+      })
+      .error(function(data, status, headers, config) {
+      });
+  };
+  var stop;
+  $scope.loadLiveData = function(){
+    if ( angular.isDefined(stop) ) return;
+
+    $scope.loadLiveDataFunction();
+    stop = $interval(function() {$scope.loadLiveDataFunction();}, 1000*3);
+
+  };
+  $scope.stopLiveData = function() {
+    if (angular.isDefined(stop)) {
+      $interval.cancel(stop);
+      stop = undefined;
+    }
+  };
+
+
+  $scope.changeGraphMode = function(mode) {
+    if (mode === 'Sparing'){
+      $scope.stopLiveData();
+
       $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType})
         .success(function(data, status, headers, config) {
           console.log("ingenting", '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType);
@@ -93,18 +122,12 @@ app.controller('GraphController', ['$scope', '$http', '$rootScope',
         .error(function(data, status, headers, config) {
           console.log("feil");
         });
-  }
-]);
+    }
+    else if (mode === 'Live'){
+      $scope.loadLiveData();
+    }
+  };
 
-app.controller('demo-steinskjer-realtime', ['$scope', '$http', '$rootScope',
-  function($scope, $http, $rootScope) {
-    var getData = setInterval(function(){
-    $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.realtime.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.realtime.date() + '&dateTo=' + $rootScope.realtime.date() + '&intervalType=' + $rootScope.realtime.intervalType})
-      .success(function(data, status, headers, config) {
-        // Got data :)
-      })
-      .error(function(data, status, headers, config) {
-      });
-    }, 1000*60);
-  }
-]);
+
+}]);
+

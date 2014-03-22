@@ -22,9 +22,8 @@ html(ng-app="powerhack")
 
     #sidebar
       .grid
-        a#test(href='#') Live
-        a(href='#') Sparing
-        a(href='#') Naboen
+        a(href='#', ng-repeat='graphType in graphTypes', ng-click='changeGraphMode(graphType)') {{graphType}}
+
 
       #sidebar-content
         .consumption
@@ -40,7 +39,7 @@ html(ng-app="powerhack")
         li
           a(href='') Histogram
 
-      svg(ng-controller='GraphController')#graph
+      svg#graph
 
     footer
       #category-nav
