@@ -16,7 +16,6 @@ var clearGraph = function() {
 }
 
 exports.addYearlyGraph = function(json) {
-  console.log("blir kalt");
   clearGraph();
   yearlyData = [{
     key: 'Årsforbruk',
@@ -38,7 +37,6 @@ exports.addYearlyGraph = function(json) {
     10: 0,
     11: 0
   };
-  console.log("fe", json);
 
   var year = moment().year();
   var lastYear = year - 1;
@@ -46,13 +44,10 @@ exports.addYearlyGraph = function(json) {
   for (var key in json) {
     var timeStamp = moment(json[key].timeStamp, 'YYYY-MM-DD');
     if (timeStamp.isSame(timeStamp, 'year')) {
-      console.log("her", timeStamp.month());
       months[timeStamp.month()] += json[key].value;
     }
   }
-  console.log(months, "months");
   for (var i = 0; i < 12; i++) {
-    console.log("pushing");
     yearlyData[0].values.push({
       x: moment().month(i).format('MMMM'),
       y: months[i]
