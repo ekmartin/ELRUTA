@@ -17,7 +17,8 @@ app.configure(function() {
   }));
   app.use(express.static(__dirname + '/public'));
   app.use('/data', express.static(__dirname + '/assets/data'));
-  app.use("/images", express.static(__dirname + '/assets/images'))
+  app.use("/images", express.static(__dirname + '/assets/images'));
+  app.use("/css", express.static(__dirname + '/assets/css'));
 
   app.locals.pretty = true;
 });

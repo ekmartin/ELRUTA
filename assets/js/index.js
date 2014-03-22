@@ -23,6 +23,7 @@ app.run(function($rootScope, $http) {
     intervalType: "Minute"
   };
 
+  $rootScope.paceCss = '/css/pace.default.css';
 
 });
 
@@ -193,6 +194,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
         .success(function(data, status, headers, config) {
           $scope.data = data;
           $scope.calculateNextMonth(data);
+          $scope.wantedPrice = parseInt($scope.estimatedNextMonth());
           graph.addLineGraph(data);
         })
         .error(function(data, status, headers, config) {
@@ -240,6 +242,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
       $scope.loadDataFunction();
     }
     else if (mode === 'Live'){
+      $rootScope.paceCss = '/css/pace.simple.css';
       $scope.loadLiveData();
     }
     else if (mode === 'Årsforbruk') {

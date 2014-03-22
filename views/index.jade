@@ -4,12 +4,13 @@ html(ng-app="powerhack")
     meta(charset='utf-8')
     title PowerHack
 
-    script(data-pace-options='{ "restartOnRequestAfter": false }', src="/bower_components/pace/pace.min.js")
+    script(src="/bower_components/pace/pace.min.js")
     link(rel='stylesheet' href='/bower_components/nvd3/nv.d3.min.css')
     link(rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.min.css')
     link(rel='stylesheet' href='/bower_components/css-toggle-switch/dist/toggle-switch.css')
     link(rel='stylesheet' href='/css/style.css')
     link(rel='shortcut icon' href='/images/favicon.ico')
+    link(rel='stylesheet', ng-href='{{paceCss}}')
 
   body(ng-controller='MainController')
     header
@@ -42,12 +43,6 @@ html(ng-app="powerhack")
             input(ng-model='wantedPrice', type='number', ng-blur='proposeSavings()')
 
     #content
-      ul.tabs
-        li
-          a.active(href='') Pie Chart
-        li
-          a(href='') Histogram
-
       svg#graph
 
     footer
