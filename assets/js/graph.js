@@ -162,7 +162,7 @@ exports.updateData = function(change) {
   }
 
   for (var j in data[changeGraph].values) {
-    data[changeGraph].values[j].y *= change;
+    data[changeGraph].values[j].y = data[changeGraph-1].values[j]*change;
   }
 
   console.log(data);
