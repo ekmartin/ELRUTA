@@ -213,14 +213,14 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
 
   $scope.loadYearly = function() {
     if ($scope.data != null) {
-      graph.addYearlyGraph($scope.data);
+      graph.addYearlyGraph($scope.data, false);
     }
     else {
       $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType})
         .success(function(data, status, headers, config) {
           $scope.data = data;
           $scope.calculateNextMonth(data);
-          graph.addYearlyGraph(data);
+          graph.addYearlyGraph(data, false);
         })
         .error(function(data, status, headers, config) {
           console.log(arguments);
