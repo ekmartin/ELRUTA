@@ -77,8 +77,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     cooler: [0.01, false],
     heat: [0.175, false],
     insulation: [0.175, false],
-    curtains: [0.025, false],
-    temp: [0.01, false]
+    curtains: [0.025, false]
 
   };
 
@@ -195,8 +194,6 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
           $scope.data = data;
           $scope.calculateNextMonth(data);
           graph.addLineGraph(data);
-          angular.element(document.querySelector('head')).append($compile("")(scope)); // Found here : http://stackoverflow.com/a/11913182/1662766
-
         })
         .error(function(data, status, headers, config) {
           console.log(arguments);
