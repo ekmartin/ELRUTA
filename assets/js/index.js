@@ -91,6 +91,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     }, 0);
 
     graph.updateData($scope.factor);
+    $scope.estimatedNextMonth();
   }, true);
 
   var meterValueTimer = function() {
@@ -140,8 +141,11 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
       if (value.timeStamp.indexOf(((today.getYear() + 1900)-1) + prefix + month) != -1) {
         totalKiloWatt += value.value;
       }
-    }
+    };
     $scope.nextMonth = $scope.calculateEarned(totalKiloWatt, 1);
+    $scope.estimatedNextMonth = function() {
+      return $scope.nextMonth * $scope.factor;
+    };
   };
 
 

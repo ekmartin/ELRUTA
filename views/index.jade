@@ -34,8 +34,10 @@ html(ng-app="powerhack")
             span {{yearUsage | number:0}} kWh
           p Målerverdi
             span {{meterValue | number:3 }} kWh
-          p Neste måned
+          p Estimert månedsforbruk
             span {{nextMonth | number:0}} kr
+          p Forbedret månedsforbruk
+            span {{estimatedNextMonth() | number:0}} kr
 
     #content
       ul.tabs
