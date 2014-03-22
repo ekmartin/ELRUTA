@@ -51,6 +51,10 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', f
 
   meterValueTimer();
 
+  $scope.updateGraph = function(value) {
+    graph.updateData(value);
+  };
+
   $scope.chooseCategory = function(category) {
     $scope.currentCategory = category;
     localStorageService.add('currentCategory', category);
