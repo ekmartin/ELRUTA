@@ -52,7 +52,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   $scope.changeFactor = 1.0;
 
   $scope.$watch('changeFactor', function() {
-    graph.updateData($scope.changeFactor);
+    graph.updateData(Math.max(0.1, $scope.changeFactor));
   });
 
   var meterValueTimer = function() {

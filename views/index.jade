@@ -18,9 +18,9 @@ html(ng-app="powerhack")
           label Personer
           label Rom
           br
-          
-          input(type='number', ng-model='household.persons')
-          input(type='number', ng-model='household.rooms')
+
+          input(type='number', ng-model='household.persons', min='0')
+          input(type='number', ng-model='household.rooms', min='0')
 
     #sidebar
       .grid
