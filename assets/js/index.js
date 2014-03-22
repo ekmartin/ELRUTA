@@ -72,22 +72,18 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   };
 
   $scope.switches = {
-    shower: false,
+    shower: 0,
   };
-
-  $scope.toggleSwitch = function(switchName) {
-    $scope.switches[switchName] = !$scope.switches[switchName];
-  };
-
+  
   $scope.$watch('switches', function() {
     var factor = 1 - Object.keys($scope.powerSavings).reduce(function(accumulated, key) {
-      return $scope.switches[key]
+      return !!$scope.switches[key]
         ? accumulated + $scope.powerSavings[key]
         : accumulated;
-    });
+    }, 0);
 
     graph.updateData(factor);
-  });
+  }, true);
 
   var meterValueTimer = function() {
     $scope.meterValue += 1;

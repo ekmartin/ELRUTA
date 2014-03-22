@@ -35,7 +35,7 @@ exports.addRealtimeGraph = function(json) {
         if (realtimeChart != null) {
           console.log("rtchart rez");
           realtimeChart.update();
-        } 
+        }
       });
 
       return realtimeChart;
@@ -168,7 +168,3 @@ exports.updateData = function(change) {
   console.log(data);
   chart.update();
 };
-
-
-
-//$('#test').click(function() { console.log("hei");exports.updateData(10);});
