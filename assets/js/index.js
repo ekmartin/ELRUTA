@@ -155,7 +155,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
     });
   };
 
-  $scope.graphTypes = ['Sparing', 'Live'];
+  $scope.graphTypes = ['Sparing', 'Live', 'Årsforbruk'];
   $scope.loadLiveDataFunction = function(){
     $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.realtime.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.realtime.date() + '&dateTo=' + $rootScope.realtime.date() + '&intervalType=' + $rootScope.realtime.intervalType})
       .success(function(data, status, headers, config) {
@@ -170,7 +170,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
 
   $scope.loadDataFunction = function() {
     if ($scope.data != null) {
-      graph.addLineGraph(data);
+      graph.addLineGraph($scope.data);
     }
     else {
       $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType})
@@ -202,8 +202,20 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   };
 
   $scope.loadYearly = function() {
-    if (angular.isDefined(stop)) return;
-
+    if ($scope.data != null) {
+      graph.addYearlyGraph($scope.data);
+    }
+    else {
+      $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType})
+        .success(function(data, status, headers, config) {
+          $scope.data = data;
+          $scope.calculateNextMonth(data);
+          graph.addYearlyGraph(data);
+        })
+        .error(function(data, status, headers, config) {
+          console.log(arguments);
+      });
+    }
   }
 
   $scope.changeGraphMode = function(mode) {

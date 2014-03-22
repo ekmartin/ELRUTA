@@ -16,6 +16,7 @@ var clearGraph = function() {
 }
 
 exports.addYearlyGraph = function(json) {
+  console.log("blir kalt");
   clearGraph();
   yearlyData = [{
     key: 'Årsforbruk',
@@ -37,24 +38,35 @@ exports.addYearlyGraph = function(json) {
     10: 0,
     11: 0
   };
+  console.log("fe", json);
+
+  var year = moment().year();
+  var lastYear = year - 1;
 
   for (var key in json) {
     var timeStamp = moment(json[key].timeStamp, 'YYYY-MM-DD');
-    months[moment.month(timeStamp).format('M')-1] += json[key].value;
+    if (timeStamp.isSame(timeStamp, 'year')) {
+      console.log("her", timeStamp.month());
+      months[timeStamp.month()] += json[key].value;
+    }
   }
-
-  for (var i = 0; i < months.length; i++) {
-    yearlyData.values.push([
-      x: moment.month(i).format('MMMM'),
-      y: json[key].value
-    ]);
+  console.log(months, "months");
+  for (var i = 0; i < 12; i++) {
+    console.log("pushing");
+    yearlyData[0].values.push({
+      x: moment().month(i).format('MMMM'),
+      y: months[i]
+    });
   }
 
   nv.addGraph(function() {
     yearlyChart = nv.models.discreteBarChart()
       .staggerLabels(true)
       .showValues(true)
-      .transitionDuration: 250;
+      .transitionDuration(250)
+      .options({
+        margin: {left: 100, bottom: 50}
+      });
 
     yearlyChart.xAxis
       .axisLabel('Måned');
@@ -71,8 +83,9 @@ exports.addYearlyGraph = function(json) {
         yearlyChart.update();
       }
     });
-  })
-}
+  });
+};
+
 exports.addRealtimeGraph = function(json) {
   clearGraph();
   nv.addGraph(function() {
@@ -100,7 +113,6 @@ exports.addRealtimeGraph = function(json) {
 
     nv.utils.windowResize(function() {
       if (realtimeChart != null) {
-        console.log("rtchart rez");
         realtimeChart.update();
       }
     });
@@ -126,7 +138,7 @@ exports.addLineGraph = function(json) {
 
   for (var key in json) {
     var year = moment().year();
-    var lastYear = year -1;
+    var lastYear = year - 1;
     var timeStamp = moment(json[key].timeStamp, 'YYYY-MM-DD');
     var modTimeStamp = moment(json[key].timeStamp.replace(String(lastYear), String(year)), 'YYYY-MM-DD');
     data[0].values.push({
@@ -158,7 +170,6 @@ nv.addGraph(function() {
       });
     chart.x2Axis
       .tickFormat(function(d) {
-          console.log("d:", d);
           return d3.time.format('%d/%m/%y')(new Date(d*1000));
       });
     chart.yAxis
@@ -173,7 +184,6 @@ nv.addGraph(function() {
 
     nv.utils.windowResize(function() {
       if (chart != null) {
-        console.log("chart rez");
         chart.update();
       }
     });
@@ -198,13 +208,12 @@ exports.updateLiveData = function(json) {
       y: json[i].value
     });
   }
-  console.log("new data:", realtimeData);
+
   if (!realtimeChart) {
     exports.addRealtimeGraph(realtimeData);
   }
   else {
     exports.addRealtimeGraph(realtimeData);
-    console.log("updaing realtimeChart");
     realtimeData[0].values.shift();
     realtimeChart.update();
   }
@@ -212,12 +221,10 @@ exports.updateLiveData = function(json) {
 
 exports.updateData = function(change) {
   if (chart) {
-    console.log("her", change);
     if (!data[2]) {
-      console.log("lager");
       data.push(
         {
-          key: 'Forbedret Estimat',
+          key: 'Forbedret',
           color: '#a8bf46',
           values: []
         }
