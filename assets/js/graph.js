@@ -1,7 +1,10 @@
 var data;
 var realtimeData;
+var yearlyData; 
+
 var chart;
 var realtimeChart;
+var yearlyChart;
 
 var changeGraph = 2;
 
@@ -9,41 +12,101 @@ var clearGraph = function() {
   $('#graph').empty();
   chart = null;
   realtimeChart = null;
+  yearlyChart = null;
+}
+
+exports.addYearlyGraph = function(json) {
+  clearGraph();
+  yearlyData = [{
+    key: 'Årsforbruk',
+    color: '#312e3f',
+    values: []
+  }];
+
+  var months = {
+    0: 0,
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0,
+    7: 0,
+    8: 0,
+    9: 0,
+    10: 0,
+    11: 0
+  };
+
+  for (var key in json) {
+    var timeStamp = moment(json[key].timeStamp, 'YYYY-MM-DD');
+    months[moment.month(timeStamp).format('M')-1] += json[key].value;
+  }
+
+  for (var i = 0; i < months.length; i++) {
+    yearlyData.values.push([
+      x: moment.month(i).format('MMMM'),
+      y: json[key].value
+    ]);
+  }
+
+  nv.addGraph(function() {
+    yearlyChart = nv.models.discreteBarChart()
+      .staggerLabels(true)
+      .showValues(true)
+      .transitionDuration: 250;
+
+    yearlyChart.xAxis
+      .axisLabel('Måned');
+
+    yearlyChart.yAxis
+      .axisLabel('Strømforbruk (kW/h)');
+
+    d3.select('#graph')
+      .datum(yearlyData)
+      .call(yearlyChart);
+
+    nv.utils.windowResize(function() {
+      if (yearlyChart != null) {
+        yearlyChart.update();
+      }
+    });
+  })
 }
 exports.addRealtimeGraph = function(json) {
   clearGraph();
   nv.addGraph(function() {
-      realtimeChart = nv.models.lineChart()
-        .options({
-          showXAxis: true,
-          showYAxis: true,
-          transitionDuration: 250,
-          margin: {left: 100, bottom: 50}
-        });
-
-      //chart.useInteractiveGuideline(true);
-      realtimeChart.xAxis
-        .axisLabel('Klokkeslett')
-        .tickFormat(function(d) {
-            return d3.time.format('%H:%M')(new Date(d*1000));
-        });
-      realtimeChart.yAxis
-        .axisLabel('Strømforbruk (kW/h)')
-        .tickFormat(d3.format(',2f'));
-
-      d3.select('#graph')
-          .datum(realtimeData)
-          .call(realtimeChart);
-
-      nv.utils.windowResize(function() {
-        if (realtimeChart != null) {
-          console.log("rtchart rez");
-          realtimeChart.update();
-        }
+    realtimeChart = nv.models.lineChart()
+      .options({
+        showXAxis: true,
+        showYAxis: true,
+        transitionDuration: 250,
+        margin: {left: 100, bottom: 50}
       });
 
-      return realtimeChart;
+    //chart.useInteractiveGuideline(true);
+    realtimeChart.xAxis
+      .axisLabel('Klokkeslett')
+      .tickFormat(function(d) {
+          return d3.time.format('%H:%M')(new Date(d*1000));
+      });
+    realtimeChart.yAxis
+      .axisLabel('Strømforbruk (kW/h)')
+      .tickFormat(d3.format(',2f'));
+
+    d3.select('#graph')
+        .datum(realtimeData)
+        .call(realtimeChart);
+
+    nv.utils.windowResize(function() {
+      if (realtimeChart != null) {
+        console.log("rtchart rez");
+        realtimeChart.update();
+      }
     });
+
+    return realtimeChart;
+  });
 };
 
 exports.addLineGraph = function(json) {
