@@ -2,11 +2,15 @@
 
 MIT Dropouts' bidrag til Demo Steinkjers Hackathon, PowerHack 2014.
 
-**Screenshots:**
+**Liveversjon:**
 
-http://i.imgur.com/iPlGTHh.png
+[Link](http://elruta.ekmartin.no)  -  (ikke veldig kompatibel med lave skjermoppløsninger!)
 
-http://i.imgur.com/8FVgJHk.png
+**Bilder:**
+
+[Bilde 1](http://i.imgur.com/iPlGTHh.png)
+
+[Bilde 2](http://i.imgur.com/8FVgJHk.png)
 
 ```bash
 Kjøres med: 
