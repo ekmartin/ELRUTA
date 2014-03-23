@@ -1,8 +1,8 @@
 ICONS=$(shell find assets/images -name "*.orig.png")
 
 install:
-	node_modules/bower/bin/bower install
 	npm install
+	node_modules/bower/bin/bower install
 
 server:
 	node_modules/.bin/supervisor index.js
@@ -10,4 +10,4 @@ server:
 test:
 	node_modules/.bin/mocha --colors --reporter list
 
-.PHONY: server install test 
+.PHONY: server install test
