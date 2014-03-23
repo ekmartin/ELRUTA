@@ -182,7 +182,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
   $scope.currentView = 'Sparing';
   $scope.graphTypes = ['Sparing', 'Live', 'Årsforbruk'];
   $scope.loadLiveDataFunction = function(){
-    $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.realtime.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.realtime.date() + '&dateTo=' + $rootScope.realtime.date() + '&intervalType=' + $rootScope.realtime.intervalType})
+    $http({method: 'GET', url: '/api/demo-steinkjer.json?meter=' + $rootScope.realtime.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.realtime.date() + '&dateTo=' + $rootScope.realtime.date() + '&intervalType=' + $rootScope.realtime.intervalType})
       .success(function(data, status, headers, config) {
         graph.updateLiveData(data);
       })
@@ -198,7 +198,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
       graph.addLineGraph($scope.data);
     }
     else {
-      $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType})
+      $http({method: 'GET', url: '/api/demo-steinkjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType})
         .success(function(data, status, headers, config) {
           $scope.data = data;
           $scope.calculateNextMonth(data);
@@ -232,7 +232,7 @@ app.controller('MainController', ['$scope', '$timeout', 'localStorageService', '
       graph.addYearlyGraph($scope.data, false);
     }
     else {
-      $http({method: 'GET', url: '/api/demo-steinskjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType})
+      $http({method: 'GET', url: '/api/demo-steinkjer.json?meter=' + $rootScope.meter + '&seriesType=' + $rootScope.seriesType + '&dateFrom=' + $rootScope.saving.dateFrom + '&dateTo=' + $rootScope.saving.dateTo + '&intervalType=' + $rootScope.saving.intervalType})
         .success(function(data, status, headers, config) {
           $scope.data = data;
           $scope.calculateNextMonth(data);
