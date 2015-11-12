@@ -18,6 +18,6 @@
   "license": "MIT",
   "devDependencies": {
     "supervisor": "~0.9.1",
-    "browserify": "~3.32.x"
+    "browserify": "~12.0.1"
   }
 }
