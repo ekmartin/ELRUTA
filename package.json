@@ -11,13 +11,13 @@
     "mocha": "*",
     "express": "*",
     "supervisor": "*",
-    "browserify-middleware": "~2.3.0",
-    "superagent": "~0.17.0"
+    "browserify-middleware": "~7.0.0",
+    "superagent": "~1.4.0"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "supervisor": "~0.5.x",
-    "browserify": "~3.32.x"
+    "supervisor": "~0.9.1",
+    "browserify": "~12.0.1"
   }
 }
